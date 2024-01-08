@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Registration Page</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+    body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.form-style-5{
+	max-width: 800px;
+	padding: 10px 20px;
+	background: #f4f7f8;
+	margin: 10px auto;
+	padding: 20px;
+	background: #f4f7f8;
+	border-radius: 8px;
+}
+.form-style-5 fieldset{
+	border: none;
+}
+.form-style-5 legend {
+	font-size: 1.4em;
+	margin-bottom: 10px;
+}
+.form-style-5 label {
+	display: block;
+	margin-bottom: 8px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 textarea,
+.form-style-5 select {
+	/* background: rgba(241, 241, 241, 0.1); */
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	margin: 0;
+	outline: 0;
+	padding: 7px;
+	width: 100%;
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	background-color: rgb(240, 240, 240);
+	color:#8a97a0;
+	
+	margin-bottom: 30px;
+	
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+	background: #d2d9dd;
+}
+.form-style-5 select{
+	-webkit-appearance: menulist-button;
+	height:35px;
+}
+.form-style-5 .number {
+	background: #28a745;
+	color: #fff;
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	font-size: 0.8em;
+	margin-right: 4px;
+	line-height: 30px;
+	text-align: center;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+	border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="button"]
+{
+	position: relative;
+	display: block;
+	padding: 19px 39px 18px 39px;
+	color: #FFF;
+	margin: 0 auto;
+	background: #28a745;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border: 1px solid #28a745;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+}
+footer {
+    background-color: #28a745;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+h5:hover{
+        background-color: #c5c5c5;
+        color: black;
+        
+}
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="button"]:hover
+{
+	background:#218a3a;
+}
+input[type="password"]:focus {
+ outline: none;
+ border: none;
+ 
+}
+
+</style>
+</head>
+
+<body>
+    {{>navbar}}
+<div class="form-style-5">
+<form method="post" action="/registration">
+<fieldset>
+<legend> Fill your Details</legend>
+<label for="">Enter Your Name <span style="color: red; font-weight:bolder">*</span></label>
+<input type="text" name="name" required>
+<label for="">Enter Your Mobile Number <span style="color: red; font-weight:bolder">*</span></label>
+<input type="number" name="mobile" required>
+<label for="">Enter Your Age <span style="color: red; font-weight:bolder">*</span></label>
+<input type="number" name="age" required>
+<label for="">Enter Your Income <span style="color: red; font-weight:bolder">*</span></label>
+<input type="number" name="income" required >
+<label for="">Enter the Crops you cultivate <span style="color: red; font-weight:bolder">*</span></label>
+<input type="text" name="crop" required>
+<label for="">Enter Your Locality </label>
+<input type="text" name="locality" >
+<label for="">Enter Landmark of your Locality</label>
+<input type="text" name="landmark" >
+<label for="">Enter Your State <span style="color: red; font-weight:bolder">*</span></label>
+<input type="text" name="state" required >
+{{!-- <label for="state">State:</label>
+<select id="state" name="state">
+    <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+</select> --}}
+<label for="">Enter Your Field Size in Acres <span style="color: red; font-weight:bolder">*</span></label>
+<input type="number" name="fieldsize" required>
+<label for="schemebenef" >Have you used any of the available schemes :</label>
+<input type="radio" id="yes" name="schemeavail" value="yes" style="color: #8a97a0;">Yes &nbsp;
+<input type="radio" id="no" name="schemeavail" value="no" style="color: #8a97a0;">No
+<br><br>
+<label for="wateravail" >Is water easily available at your Farm </label>
+<input type="radio" id="yes" name="wateravail" value="yes" style="color: #8a97a0;">Yes &nbsp;
+<input type="radio" id="no" name="wateravail" value="no" style="color: #8a97a0;">No
+<br><br>
+<label for="">Enter Your Password <span style="color: red; font-weight:bolder">*</span></label>
+<input type="password" name="currpassword" id="cpass" required style="width: 100%; height:2.5rem; border-radius:5px;border:none; background-color:#f0f0f0;color: #8a97a0;padding:0 5px">
+<label for="">Confirm Your Password <span style="color: red; font-weight:bolder">*</span></label>
+<input type="password" name="confpassword" id="'conpass" onkeyup="check(this)" required style="width: 100%; height:2.5rem; border-radius:5px;border:none; background-color:#f0f0f0;color: #8a97a0;padding:0 5px;">
+<error id="err" style="color: red;"></error>
+
+</fieldset><br>
+<input type="submit" value="Register Now"/>
+</form>
+</div>
+<footer>
+    <p>&copy; 2023 FarmAssist. All rights reserved.</p>
+</footer>
+<script>
+  let pass = document.getElementById('cpass');
+  function check(elem){
+    if(elem.value.length > 0 ){
+      if(elem.value != pass.value){
+        document.getElementById('err').innerText ='Password do not match';
+      }
+      else {
+        document.getElementById('err').innerText =''
+      }
+    }
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

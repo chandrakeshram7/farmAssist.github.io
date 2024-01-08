@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .login-container {
+            width: 360px;
+            padding: 16px;
+            background-color: white;
+            margin: 100px auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+            animation: fadeIn 1s;
+            
+        }
+
+        .login-container .form-group {
+            margin-bottom: 15px;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .login-container input[type=number], .login-container input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .login-container input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        #btn{
+            height: 45px;
+            width: 130px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            border: #2c662f solid 3px;
+            color: #2c662f;
+            margin: auto;
+        }
+        #btn:hover{
+            color: white;
+            background-color: #2c662f;
+            cursor: pointer;
+        }
+        .login-container #btn{
+            margin: auto;
+            margin-left: 113px
+        }
+        .login-container input[type=number] , .login-container input[type=password]{
+            background-color: #ebe1e1;
+        }
+        .login-container input[type=number] , .login-container input[type=password]:focus{
+            background-color: #ebe1e1;
+            border: none;
+            outline: none;
+
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            align-items: center;
+            margin: auto;
+
+        }
+        @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="/loginimg.png" alt="Profile Image" style="margin-left: 126px;margin-top:2rem; text-align:center;"  class="profile-img">
+        <h2 style="text-align: center;color:#2c662f; font-weight:bolder;font-size:2rem;">Log In</h2>
+        <form method="post" action="/login">
+       
+        
+            <div class="form-group">
+                <label for="uname" style="color:#2c662f; font-size:1.2rem;" ><b>Mobile No.</b></label>
+                <input type="number" placeholder="Enter Your Mobile No." name="mobile" style="color: rgb(89, 89, 89);font-size:1rem" required>
+            </div>
+            <div class="form-group">
+                <label for="psw" style="color: #2c662f;font-size:1.2rem;"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password"  style="color: rgb(89, 89, 89);font-size:1rem" name="password" required>
+            </div>
+            <p style="color: red; margin:auto;text-align:center;margin-bottom:1rem">{{error}}</p>
+            <button type="submit" id="btn">Login</button>
+            
+        </form>
+    </div>
+</body>
+</html>

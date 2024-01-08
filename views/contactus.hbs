@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="contact.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+      h5:hover{
+        background-color: #c5c5c5;
+        color: black;
+        
+      }
+    </style>
+</head>
+
+<body>
+    {{>navbar}}
+      
+    <div class="container">
+        <div class="template">
+            <p>
+                <h2>Steps To Achieve Success</h2>
+                Be Passionate<bR>
+                Work Hard<br>
+                Focus <br>
+                Perseverence <br>
+                Push the Limits<br>
+            </p>
+        </div>
+            
+        
+        <div class="contact-box">
+            
+            <div class="contact-right">
+                <h3>Reach us</h3>
+                <div class="contact">
+                    <a href="#"><i class="fas fa-envelope-open-text"></i></a>
+                    <p>Email : farmassist@gmail.com</p>
+            </div>
+            <div class="contact">
+                <a href="#"><i class="fas fa-phone"></i></a>
+                <p>Mobile : 7875843473</p>
+            </div>
+            <div class="contact">
+                <a href="#"><i class="fas fa-map-marker-alt"></i></a>
+                <p>Head Office : Pune Maharashtra </p>
+            </div>
+            
+    
+        
+      
+    
+            </div>
+            <div class="contact-left">
+                <h3>Send your request</h3>
+                <form method="post" action="/contactus">
+                    <div class="input-row">
+    
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Full Name" name="fname" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Mobile No.</label>
+                            <input type="text" placeholder="Mobile No." name="fmobile" required>
+                        </div>
+                    </div>
+    
+                    <div class="input-row">
+    
+                        <div class="input-group">
+                            <label>Email</label><br>
+                            <input type="text" placeholder="Email" name="femail" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Subject</label><br>
+                            <input type="text" placeholder="Purpose"  name="fsubject" required>
+                        </div>
+                    </div>
+    
+                    <label class ="send">Message</label>
+                    <textarea rows="5" placeholder="Message" class="textarea" name="fmessage" required></textarea>
+    
+                    <button type="submit" src="/" class="button">Send</button>
+    
+    
+                </form>
+            </div>
+    
+    
+        </div>
+
+        
+    </div>
+    <footer>
+        <p>&copy; 2023 FarmAssist. All rights reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/5b5bf4dfb4.js" crossorigin="anonymous"></script> 
+<script src="script.js"></script>
+</body>
+</html>

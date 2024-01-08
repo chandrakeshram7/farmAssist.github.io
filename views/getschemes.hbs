@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Schemes Now</title>
+    <style>
+        body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+
+.top{
+    margin-top: -3rem;
+    background-color: #4CAF50;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+.top h1 {
+  font-size: 2.5rem;
+  margin-top: 1rem;
+}
+
+.top p {
+  font-size: 1.2rem;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+form {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1rem;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#recommendations {
+  display: none;
+  margin-top: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  color: #333;
+}
+#recommendations {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-header {
+  color: #4CAF50;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.recommendation-list {
+  list-style: none;
+  padding: 0;
+}
+
+.recommendation-list li {
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.recommendation-list li:hover {
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    </style>
+</head>
+<body>
+    {{>navbar}}
+    <br><br>
+  <div class="top">
+    <h1>Get Your Personalized Schemes here</h1>
+    <p>Explore the latest agricultural schemes for your farm.</p>
+  </div>
+  <main>
+    <form id="userForm">
+      <label for="farmSize">Farm Size (in acres):</label>
+      <input type="number" id="farmSize" name="farmSize" required>
+
+      <label for="cropType">Main Crop Type:</label>
+      <input type="text" id="cropType" name="cropType" required>
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" required>
+
+      <label for="irrigationMethod">Irrigation Method:</label>
+      <select id="irrigationMethod" name="irrigationMethod" required>
+        <option value="drip">Drip Irrigation</option>
+        <option value="sprinkler">Sprinkler Irrigation</option>
+        <option value="flood">Flood Irrigation</option>
+      </select>
+
+      <button type="button" id="recommendBtn" onclick="recommendSchemes()">Recommend Schemes</button>
+    </form>
+
+    <div id="recommendations" style="display: none;">
+      <h2 style="font-weight: bolder;">Recommended Schemes:</h2>
+      <ul id="schemeList"></ul>
+    </div>
+  </main>
+
+  <footer>
+        <p>&copy; 2023 FarmAssist. All rights reserved.</p>
+    </footer>
+
+  <script >
+    function recommendSchemes() {
+  const farmSize = parseFloat(document.getElementById('farmSize').value);
+  const cropType = document.getElementById('cropType').value;
+
+  let recommendedSchemes = [];
+
+  if (farmSize > 10 && cropType.toLowerCase() === 'rice') {
+    recommendedSchemes.push('PM-KISAN Yojana', 'Smart Irrigation Grant');
+  } else if (farmSize <= 10 && cropType.toLowerCase() === 'corn') {
+    recommendedSchemes.push('Green Crop Initiative', 'Organic Farming Subsidy');
+  } else {
+    recommendedSchemes.push('PM-KISAN Yojana');
+  }
+
+  displayRecommendations(recommendedSchemes);
+}
+
+function displayRecommendations(schemes) {
+  const schemeList = document.getElementById('schemeList');
+  const recommendationsDiv = document.getElementById('recommendations');
+
+  schemeList.innerHTML = '';
+
+  schemes.forEach(scheme => {
+    const listItem = document.createElement('li');
+    listItem.textContent = scheme;
+    schemeList.appendChild(listItem);
+  });
+
+  recommendationsDiv.style.display = 'block';
+}
+
+  </script>
+
+
+</body>
+</html>

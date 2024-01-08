@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Farm Scheme Recommendations</title>
+  <style>
+    body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+footer {
+    background-color: #28a745;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+main {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.scheme-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.scheme-card h2 {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.scheme-card p.description {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.learn-more-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+
+  </style>
+</head>
+<body>
+  {{>navbar}}
+  <div class="top">
+    <h1 style="text-align: center; color:#28a745;margin:auto; font-weight:bolder;margin-top:1rem;margin-bottom:16px">Most Popular Schemes</h1>
+  </div>
+  <main>
+    <section class="scheme-card">
+      <h2>Green Crop Initiative</h2>
+      <p class="description">Boost your yield with eco-friendly farming practices.</p>
+      <button class="learn-more-btn">Learn More</button>
+    </section>
+    <section class="scheme-card">
+      <h2>Smart Irrigation Grant</h2>
+      <p class="description">Efficient water usage for improved crop health.</p>
+      <button class="learn-more-btn">Learn More</button>
+    </section>
+     <section class="scheme-card">
+    <h2>PM-KISAN Yojana</h2>
+    <p class="description">Financial support to small and marginal farmers.</p>
+    <button class="learn-more-btn">Learn More</button>
+  </section>
+
+  <section class="scheme-card">
+    <h2>Green Crop Initiative</h2>
+    <p class="description">Boost your yield with eco-friendly farming practices.</p>
+    <button class="learn-more-btn">Learn More</button>
+  </section>
+
+  <section class="scheme-card">
+    <h2>Smart Irrigation Grant</h2>
+    <p class="description">Efficient water usage for improved crop health.</p>
+    <button class="learn-more-btn">Learn More</button>
+  </section>
+
+  <section class="scheme-card">
+    <h2>Organic Farming Subsidy</h2>
+    <p class="description">Encouraging organic practices with financial incentives.</p>
+    <button class="learn-more-btn">Learn More</button>
+  </section>
+
+  <section class="scheme-card">
+    <h2>Rural Solar Power Scheme</h2>
+    <p class="description">Harness solar energy for sustainable farming.</p>
+    <button class="learn-more-btn">Learn More</button>
+  </section>
+
+  <section class="scheme-card">
+    <h2>Farm Mechanization Grant</h2>
+    <p class="description">Assistance for modernizing farming equipment.</p>
+    <button class="learn-more-btn">Learn More</button>
+  </section>
+
+
+  </main>
+   <footer>
+        <p>&copy; 2023 FarmAssist. All rights reserved.</p>
+    </footer>
+</body>
+</html>
