@@ -1,3 +1,6 @@
+//Controller Logic MVC Architeture
+
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -15,6 +18,23 @@ const partial_path = path.join(__dirname,'../partials');
 hbs.registerPartials(partial_path);
 app.use(express.static(view_path));
 app.set("view engine","hbs")
+
+//Foe Image Uploading and Storage Settings - Using Multer
+const multer = require('multer');
+let Storage = multer.diskStorage({
+    destination:'views/public/images/',
+    filename: (req,file, cb)=>{
+        // cb(null, Date.now(+file.originalname))
+        cb(null, file.originalname)
+    }
+})
+
+
+let upload = multer({
+    storage: Storage
+})
+
+
 // app.get('/',(req, res)=>{
 //     res.render("index")
 // });
@@ -60,7 +80,7 @@ const securePassword = async (password)=>{
         console.log(error.message);
     }
 }
-app.post('/registration',async (req, res)=>{
+app.post('/registration',upload.single('image'),async (req, res)=>{
     try{
         const password = req.body.currpassword;
         const cpassword = req.body.confpassword;
@@ -72,13 +92,16 @@ app.post('/registration',async (req, res)=>{
                 mobile: req.body.mobile,
                 age: req.body.age,
                 income: req.body.income,
-                crop: req.body.crop,
-                locality : req.body.locality,
-                landmark: req.body.landmark,
-                state: req.body.state,
+                category: req.body.category,
+                subcategory : req.body.subcategory,
+                district: req.body.district,
+                pincode: req.body.pincode,
                 fieldsize : req.body.fieldsize,
-                schemeavail :req.body.schemeavail,
-                wateravail :req.body.wateravail,
+                image: {
+                    filename: req.file.filename,
+                    path: req.file.path,
+                    size: req.file.size,
+                  },
                 currpassword : spassword,
                 confpassword: spassword
     
@@ -191,6 +214,26 @@ app.get('/login' ,(req,res)=>{
 app.get('/getschemes',(req,res)=>{
     res.render('getschemes')
 })
+
+app.get('/dashboard',(req, res)=>{
+    res.render('dashboard')
+})
+
+
+
+// app.get('/dashboard', async (req, res) => {
+
+//     try {
+//       // Fetch users from the database
+//       const users = await Register.find();
+  
+//       // Render the 'users' view with user data
+//       res.render('dashboard', { users });
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).send('Error fetching user data.');
+//     }
+//   });
 
 
 

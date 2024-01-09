@@ -5,7 +5,7 @@ const farmerData = new mongoose.Schema({
         required:true
     },
     mobile:{
-        type: Number,
+        type: String,
         required:true,
         unique:true
     },
@@ -14,22 +14,24 @@ const farmerData = new mongoose.Schema({
         required:true
     },
     income:{
+        type: Number,
+        required:true
+    },
+    category:{
         type: String,
         required:true
     },
-    crop:{
-        type: String,
+    subcategory:{
+        type:String,
         required:true
-    },
-    locality:{
-        type:String,
         
     },
-    landmark:{
+    district:{
         type:String,
+        required:true
         
     },
-    state:{
+    pincode:{
         type:String,
         required:true
     },
@@ -37,14 +39,11 @@ const farmerData = new mongoose.Schema({
         type:Number,
         required:true
     },
-    schemeavail:{
-        type:String,
-        
-    },
-    wateravail:{
-        type:String,
-        
-    },
+    image: {
+        filename: String,
+        path: String,
+        size: Number,
+      },
     currpassword:{
         type:String,
         required:true

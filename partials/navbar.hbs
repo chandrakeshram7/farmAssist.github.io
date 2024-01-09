@@ -41,7 +41,7 @@
           margin-bottom: 0;
           margin-left: 1rem;
           margin-right: 1rem;
-          padding: 5px 5px 5px 5px ;
+          padding: 0.5rem 1rem 0rem 1rem;
         }
         h5:hover{
         background-color: #c5c5c5;
@@ -50,17 +50,12 @@
        
         
       }
+      
       .nav-item:{
         transition: 1s;
       }
 
-        .content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 50px;
-            font-size: 18px;
-            line-height: 1.6;
-        }
+        
         .nav-item:hover{
           background-color: #4caf50;
           color: white;
@@ -123,10 +118,13 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item" class="hvr">
-                    <a class="nav-link active" aria-current="page" href="/" class="hvr">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/" >Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/aboutus">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/schemes">Get Popular Schemes</a>
@@ -140,6 +138,7 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/getschemes">Personalized Schemes</a>
                   </li>
+                  
                 </ul>
                     <h5 style="font-weight:light;transition:1s; height:40px; width:fit-content;text-align:center;border-radius:5px;align-items:center;justify-content:center">Welcome,  {{#if userName}}{{userName}}{{else}}Guest{{/if}}!</h5>
 
