@@ -17,12 +17,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 70vh;
+            height: 80vh;
             margin: 1rem 1rem;
         }
 
         .user-card {
-            width: 400px;
+            width: 350px;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -30,6 +30,7 @@
             text-align: center;
             transform: scale(1);
             transition: transform 0.3s ease-in-out;
+            height: 500px;
         }
 
         .avatar {
@@ -67,21 +68,25 @@ h5{
     <div class="main" style="display: flex; align-items:center;justify-content:center">
         <div class="dashboard-container">
         <div class="user-card" id="userCard">
-            <img src="/img1.jpg" alt="User Avatar" class="avatar">
-            <h2>User Name</h2>
-            <p>Email: user@example.com</p>
-            <p>Location: City, Country</p>
+            <img src="/public/images/{{user.image.filename}}" alt={{user.image.filename}} class="avatar">
+            <h2>Name : {{user.name}}</h2>
+            
         </div>
-    </div>
+    
     <div class="dashboard-container">
         <div class="user-card" id="userCard">
             <h1>User Data</h1>
-    <ul>
-        {{#each users}}
-            <li>{{name}} - {{email}}</li>
-        {{/each}}
-    </ul>
+            <p>Mobile No. : {{user.mobile}}</p>
+            <p>Age : {{user.age}}</p>
+            <p>Income : {{user.income}}</p>
+            <p>Crop Type I Cultivate : {{user.category}}</p>
+            <p>Crop I Cultivate : {{user.subcategory}}</p>
+            <p>District :  {{user.category}} &nbsp; Pincode : {{user.pincode}}</p>
+            <p>Field Size of my Farm : {{user.fieldsize}}</p>
+
+   
         </div>
+    </div>
     </div>
     </div>
     <footer>

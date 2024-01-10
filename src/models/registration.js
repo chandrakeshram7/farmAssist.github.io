@@ -44,11 +44,7 @@ const farmerData = new mongoose.Schema({
         path: String,
         size: Number,
       },
-    currpassword:{
-        type:String,
-        required:true
-    },
-    confpassword:{
+    password:{
         type:String,
         required:true
     }

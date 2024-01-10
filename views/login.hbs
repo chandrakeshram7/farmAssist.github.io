@@ -112,8 +112,11 @@
                 <label for="psw" style="color: #2c662f;font-size:1.2rem;"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password"  style="color: rgb(89, 89, 89);font-size:1rem" name="password" required>
             </div>
-            <p style="color: red; margin:auto;text-align:center;margin-bottom:1rem">{{error}}</p>
-            <button type="submit" id="btn">Login</button>
+            {{#if messages.error}}
+            <p style="color: red; margin:auto;text-align:center;margin-bottom:1rem">{{messages.error}}</p>
+            {{/if}}
+            <button type="submit" id="btn">Login</button><br><br>
+            <a href="/forgot" style="text-decoration: none; color:black;     margin: 7.2rem; text-align:right">Forgot Password</a>
             
         </form>
     </div>
