@@ -44,8 +44,8 @@
           padding: 0.5rem 1rem 0rem 1rem;
         }
         h5:hover{
-        background-color: #c5c5c5;
-        color: black;
+        background-color:#4caf50;
+        color: white;
         align-items: center;
        
         
@@ -138,14 +138,35 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/getschemes">Personalized Schemes</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/updateProfile">Update Profile</a>
+                  </li>
                   
                 </ul>
-                    <h5 style="font-weight:light;transition:1s; height:40px; width:fit-content;text-align:center;border-radius:5px;align-items:center;justify-content:center">Jai Jawan! Jai Kisan!</h5>
+                    <h5 style="font-weight:light;transition:1s; height:40px; width:fit-content;text-align:center;border-radius:5px;align-items:center;justify-content:center">
+                      {{#if user}}
+        <!-- Show logout link if the user is authenticated -->
+        <a href="/logout" style="text-decoration: none; color:#333;" id="logoutLink">Logout</a>
+    {{else}}
+        <!-- Show login link if the user is not authenticated -->
+        <a href="/login" id="loginLink" style="text-decoration: none; color:#333;">Login</a>
+    {{/if}}
 
               </div>
             </div>
           </nav>
           <marquee class="announcement" direction="">Pune Agricultural Summit 2024 is coming soon!! <span class="badge badge-success">NEW</span>
+          <script>
+    document.getElementById('logoutLink').addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent the default anchor tag behavior
+        document.getElementById('logoutForm').submit();  // Submit the form
+    });
+</script>
+
+<!-- Form for logout -->
+<form id="logoutForm" action="/logout" method="post" style="display: none;">
+    <!-- Include any necessary CSRF protection or other hidden inputs -->
+</form>
 </marquee>
     </header>
      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

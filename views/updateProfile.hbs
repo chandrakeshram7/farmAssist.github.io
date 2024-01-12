@@ -1,0 +1,475 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Update Profile Page</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+    body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.form-style-5{
+	max-width: 800px;
+	padding: 10px 20px;
+	background: #f4f7f8;
+	margin: 10px auto;
+	padding: 20px;
+	background: #f4f7f8;
+	border-radius: 8px;
+}
+.form-style-5 fieldset{
+	border: none;
+}
+.form-style-5 legend {
+	font-size: 1.4em;
+	margin-bottom: 10px;
+}
+.form-style-5 label {
+	display: block;
+	margin-bottom: 8px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 textarea,
+.form-style-5 select {
+	/* background: rgba(241, 241, 241, 0.1); */
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	margin: 0;
+	outline: 0;
+	padding: 7px;
+	width: 100%;
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	background-color: rgb(240, 240, 240);
+	color:#8a97a0;
+	
+	margin-bottom: 30px;
+	
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+	background: #d2d9dd;
+}
+.form-style-5 select{
+	-webkit-appearance: menulist-button;
+	height:35px;
+}
+.form-style-5 .number {
+	background: #28a745;
+	color: #fff;
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	font-size: 0.8em;
+	margin-right: 4px;
+	line-height: 30px;
+	text-align: center;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+	border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="button"]
+{
+	position: relative;
+	display: block;
+	padding: 19px 39px 18px 39px;
+	color: #FFF;
+	margin: 0 auto;
+	background: #28a745;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border: 1px solid #28a745;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+}
+footer {
+    background-color: #28a745;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+h5:hover{
+        background-color: #c5c5c5;
+        color: black;
+       
+        
+      }
+h5{
+     padding-right: 1rem;
+     padding-left: 1rem;
+     padding-top: 0.5rem;
+}
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="button"]:hover
+{
+	background:#218a3a;
+}
+input[type="password"]:focus {
+ outline: none;
+ border: none;
+ 
+}
+
+</style>
+</head>
+
+<body>
+     {{>navbar}}
+<div class="form-style-5">
+<form method="post" enctype="multipart/form-data" action="/updateProfile/{{user.email}}">
+<fieldset>
+<legend> Enter the Details to Update</legend>
+<label for="">Enter Your Name <span style="color: red; font-weight:bolder">*</span></label>
+<input type="text" name="name" title="Please enter at least 3 characters, using only letters " style="margin-bottom: 10px;" required id="userName" pattern="[a-zA-Z ]{3,}">
+ <span id="error-name" style="color: red;"></span><br><br>	
+<label for="">Enter Your Email ID  <span style="color: red; font-weight:bolder">*</span></label>
+<input type="email" name="email" style="margin-bottom: 10px;" id="userEmail"  title="Please enter a valid Email ID" required>
+ <span id="error-email" style="color: red;"></span><br><br>	
+<label for="">Enter Your Mobile Number  <span style="color: red; font-weight:bolder">*</span></label>
+<input type="text" name="mobile" style="margin-bottom: 10px;" id="phoneNumber" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" required>
+ <span id="error-message" style="color: red;"></span><br><br>	
+<label for="">Enter Your Age <span style="color: red; font-weight:bolder">*</span></label>
+<input type="number" min="18" style="margin-bottom:10px ;" id="age" max="100" title="Please enter a valid age between 18 and 100" name="age" required>
+ <span id="error-age" style="color: red;"></span><br><br>	
+<label for="">Enter Your Income in (₹)<span style="color: red; font-weight:bolder">*</span></label>
+<input type="number" id="income" style="margin-bottom: 10px;" name="income" required min="0" max="100000000" title="Please enter a valid positive income in Indian Rupees ">
+ <span id="error-income" style="color: red;"></span><br><br>	
+<label for="category">Select Category of Crop:<span style="color: red; font-weight:bolder">*</span></label>
+        <select id="category" style="color: #333;" name="category" onchange="showSelectList()">
+            <option value="" disabled selected>Select a category</option>
+            <option value="Grains">Grains</option>
+            <option value="Pulses">Pulses</option>
+            <option value="Vegetables">Vegetables</option>
+			<option value="Fruits">Fruits</option>
+			<option value="Cash Crops">Cash Crops</option>
+        </select>
+        <br>
+
+        <div id="grainSelect" style="display: none;">
+            <label for="grain">Select Grain:</label>
+            <select id="grain" style="color: #333;" name="subcategory">
+            <option value="" disabled selected>Select a grain</option>
+                <option value="Wheat">Wheat</option>
+                <option value="Rice">Rice</option>
+                <option value="Corn">Corn</option>
+				<option value="Millet">Millet</option>
+				<option value="Oats">Oats</option>
+				<option value="Barley">Barley</option>
+				
+                
+            </select>
+        </div>
+
+        <div id="pulseSelect" style="display: none;">
+            <label for="pulse">Select Pulse:</label>
+            <select id="pulse" style="color: #333;" name="subcategory">
+            <option value="" disabled selected>Select a pulse</option>
+                <option value="Lentils">Lentils</option>
+                <option value="Chickpeas">Chickpeas</option>
+                <option value="Beans">Beans</option>
+                <option value="Green Peas">Green Peas</option>
+                <option value="Chana Dal">Chana Dal</option>
+                <option value="Mung Beans">Mung Beans</option>
+
+            </select>
+        </div>
+
+        <div id="vegetableSelect" style="display: none;">
+            <label for="vegetable">Select Vegetable:</label>
+            <select id="vegetable" style="color: #333;" name="subcategory">
+            <option value="" disabled selected>Select a vegetable</option>
+
+                <option value="Carrot">Carrot</option>
+                <option value="Broccoli">Broccoli</option>
+                <option value="Tomato">Tomato</option>
+                <option value="Spinach">Spinach</option>
+                <option value="Cucumber">Cucumber</option>
+                <option value="Onion">Onion</option>
+                <option value="Chilli">Chilli</option>
+                <option value="Leafy Vegetables">Leafy Vegetables</option>
+
+               
+            </select>
+        </div>
+		<div id="fruitsSelect" style="display: none;">
+            <label for="fruit">Select Fruit:</label>
+            <select id="fruit" style="color: #333;" name="subcategory">
+            <option value="" disabled selected>Select a fruit</option>
+
+                <option value="Apple">Apple</option>
+                <option value="Banana">Banana</option>
+                <option value="Orange">Orange</option>
+                <option value="Strawberry">Strawberry</option>
+                <option value="Grapes">Grapes</option>
+                <option value="Mango">Mango</option>
+                <option value="Chickoo">Chickoo</option>
+                <option value="Kiwi">Kiwi</option>
+
+                <!-- Add more vegetables as needed -->
+            </select>
+        </div>
+
+		<div id="cashcropsSelect" style="display: none;">
+            <label for="cashcrops">Select Cash Crops:</label>
+            <select id="cashcrops" style="color: #333;" name="subcategory">
+            <option value="" disabled selected>Select a category</option>
+
+                <option value="Cotton">Cotton</option>
+                <option value="Tobacco">Tobacco</option>
+                <option value="Coffee">Coffee</option>
+                <option value="Tea">Tea</option>
+                <option value="Sugarcane">Sugarcane</option>
+                <option value="Rubber">Rubber</option>
+                <option value="Cocoa">Cocoa</option>
+                <option value="Spices">Spices</option>
+
+                <!-- Add more vegetables as needed -->
+            </select>
+        </div>
+    <label for="district">Select the District <strong>(For Maharashtra):</strong> <span style="color: red; font-weight:bolder">*</span></label>
+        <select id="district" name="district"  style="color: #333;" onchange="populateCities()">
+            <option value="" disabled selected>Select a district</option>
+            <option value="Ahmednagar">Ahmednagar</option>
+            <option value="Akola">Akola</option>
+            <option value="Amravati">Amravati</option>
+            <option value="Aurangabad">Aurangabad</option>
+            <option value="Beed">Beed</option>
+            <option value="Bhandara">Bhandara</option>
+            <option value="Buldhana">Buldhana</option>
+            <option value="Chandrapur">Chandrapur</option>
+            <option value="Dhule">Dhule</option>
+            <option value="Gadchiroli">Gadchiroli</option>
+            <option value="Gondia">Gondia</option>
+            <option value="Hingoli">Hingoli</option>
+            <option value="Jalgaon">Jalgaon</option>
+            <option value="Jalna">Jalna</option>
+            <option value="Kolhapur">Kolhapur</option>
+            <option value="Latur">Latur</option>
+            <option value="Mumbai City">Mumbai City</option>
+            <option value="Mumbai Suburban">Mumbai Suburban</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Nanded">Nanded</option>
+            <option value="Nandurbar">Nandurbar</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Osmanabad">Osmanabad</option>
+            <option value="Palghar">Palghar</option>
+            <option value="Parbhani">Parbhani</option>
+            <option value="Pune">Pune</option>
+            <option value="Raigad">Raigad</option>
+            <option value="Ratnagiri">Ratnagiri</option>
+            <option value="Sangli">Sangli</option>
+            <option value="Satara">Satara</option>
+            <option value="Sindhudurg">Sindhudurg</option>
+            <option value="Solapur">Solapur</option>
+            <option value="Thane">Thane</option>
+            <option value="Wardha">Wardha</option>
+            <option value="Washim">Washim</option>
+            <option value="Yavatmal">Yavatmal</option>
+        </select>
+        <br>
+<label for="">Enter Your Pincode  <span style="color: red; font-weight:bolder">*</span></label>
+<input type="text" name="pincode" style="margin-bottom: 10px;" id="pincode" pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode number" required>
+ <span id="error-pincode" style="color: red;"></span><br><br>
+<label for="">Enter Your Field Size in Acres <span style="color: red; font-weight:bolder">*</span></label>
+<input type="number" name="fieldsize" required  min="0" style="margin-bottom:10px ;" id="land" max="1000000" title="Please enter a valid field size greater than 0" name="land" required>
+ <span id="error-land" style="color: red;"></span><br><br>	
+
+
+<label for="">Upload Your Photograph Here <span style="color: red; font-weight:bolder">*</span></label>
+<input type="file" id="image" name="image" accept="image/*" required>
+<br><br>
+
+
+</fieldset><br>
+
+
+<input type="submit" value="Update Profile"/>
+</form>
+</div>
+<footer>
+    <p>&copy; 2023 FarmAssist. All rights reserved.</p>
+</footer>
+<script>
+        document.getElementById('phoneNumber').addEventListener('input', function () {
+            const phoneNumberInput = this;
+            const errorMessage = document.getElementById('error-message');
+
+            if (phoneNumberInput.validity.patternMismatch) {
+                phoneNumberInput.setCustomValidity('Please enter a valid 10-digit phone number');
+                errorMessage.textContent = 'Invalid phone number';
+            } else {
+                phoneNumberInput.setCustomValidity('');
+                errorMessage.textContent = '';
+            }
+        });
+
+		document.getElementById('pincode').addEventListener('input', function () {
+            const phoneNumberInput = this;
+            const errorMessage = document.getElementById('error-pincode');
+
+            if (phoneNumberInput.validity.patternMismatch) {
+                phoneNumberInput.setCustomValidity('Please enter a valid 7-digit phone number');
+                errorMessage.textContent = 'Invalid pincode number';
+            } else {
+                phoneNumberInput.setCustomValidity('');
+                errorMessage.textContent = '';
+            }
+        });
+
+		document.getElementById('userName').addEventListener('input', function () {
+            const userNameInput = this;
+            const errorMessage = document.getElementById('error-name');
+
+            if (userNameInput.validity.patternMismatch) {
+                userNameInput.setCustomValidity('Please enter at least 3 characters, using only letters ');
+                errorMessage.textContent = 'Invalid Name Format Please use only letters ';
+            } else {
+                userNameInput.setCustomValidity('');
+                errorMessage.textContent = '';
+            }
+        });
+//==========================================================================================================================
+		const passwordInput = document.getElementById('cpass');
+		const passwordError = document.getElementById('error-password');
+		passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+        const isValid = /(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])(?=.*[0-9])(?=.*[A-Z]).{8,}/.test(password);
+       passwordError.textContent = isValid ? '' : 'Password must contain at least one special character, one number, and one uppercase letter. Minimum length is 8 characters.';
+       });
+
+	   //Password Validation for checking appropriateness of the password
+
+//==========================================================================================================================
+
+    (function () {
+  const emailInput = document.getElementById('userEmail');
+  const emailError = document.getElementById('error-email');
+
+  emailInput.addEventListener('input', () => {
+    const email = emailInput.value;
+
+    // Validate email format
+    if (!isValidEmail(email)) {
+      emailError.textContent = 'Invalid email format.';
+    } else {
+      emailError.textContent = ''; // Clear the error message if email is valid
+    }
+  });
+
+  function isValidEmail(email) {
+    // Use a regular expression or other validation logic
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+})();
+
+
+
+
+
+
+		document.getElementById('age').addEventListener('input', function(){
+			const userAge = this;
+			const errorMessage = document.getElementById('error-age');
+			if(userAge.validity.rangeUnderflow || userAge.validity.rangeOverflow){
+				userAge.setCustomValidity('Please enter a valid age between 18 and 100');
+				errorMessage.textContent = 'Please enter a valid age between 18 and 100'
+			}
+			else {
+				userAge.setCustomValidity('');
+				errorMessage.textContent= '';
+			}
+		})
+
+		document.getElementById('income').addEventListener('input', function(){
+			const userIncome = this;
+			const errorMessage = document.getElementById('error-income');
+			if(userIncome.validity.rangeUnderflow || userIncome.validity.rangeOverflow){
+				userIncome.setCustomValidity('Please enter a valid positive income');
+				errorMessage.textContent = 'Please enter a valid positive income';
+			}
+			else {
+				userIncome.setCustomValidity('');
+				errorMessage.textContent= '';
+			}
+		})
+        // Validation for Land Size
+		document.getElementById('land').addEventListener('input', function(){
+			const userIncome = this;
+			const errorMessage = document.getElementById('error-land');
+			if(userIncome.validity.rangeUnderflow || userIncome.validity.rangeOverflow){
+				userIncome.setCustomValidity('Please enter a valid positive field size');
+				errorMessage.textContent = 'Please enter a valid positive field size';
+			}
+			else {
+				userIncome.setCustomValidity('');
+				errorMessage.textContent= '';
+			}
+		})
+   
+
+  let pass = document.getElementById('cpass');
+  function check(elem){
+    if(elem.value.length > 0 ){
+      if(elem.value != pass.value){
+        document.getElementById('err').innerText ='Password do not match';
+      }
+      else {
+        document.getElementById('err').innerText =''
+      }
+    }
+  }
+  function showSelectState(){
+
+  }
+  function showSelectList() {
+            var selectedCategory = document.getElementById('category').value;
+
+            document.getElementById('grainSelect').style.display = 'none';
+            document.getElementById('pulseSelect').style.display = 'none';
+            document.getElementById('vegetableSelect').style.display = 'none';
+			document.getElementById('fruitsSelect').style.display ='none';
+			document.getElementById('cashcropsSelect').style.display ='none'
+
+            // Show the select list based on the selected category
+            if (selectedCategory === 'Grains') {
+                document.getElementById('grainSelect').style.display = 'block';
+            } else if (selectedCategory === 'Pulses') {
+                document.getElementById('pulseSelect').style.display = 'block';
+            } else if (selectedCategory === 'Vegetables') {
+                document.getElementById('vegetableSelect').style.display = 'block';
+            } else if(selectedCategory === 'Fruits'){
+				document.getElementById('fruitsSelect').style.display = 'block';
+			} else if(selectedCategory === 'Cash Crops'){
+				document.getElementById('cashcropsSelect').style.display = 'block';
+			}
+        }
+  
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -177,7 +177,12 @@ let upload = multer({
     storage: Storage
 })
 
-
+function isAuthenticated(req, res, next) {
+    if (req.url === '/' || req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+  }
 
 
 
@@ -263,32 +268,69 @@ app.post('/login', passport.authenticate('local', {
     res.render('dashboard', { user: req.user });
     
   });
-  function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    res.redirect('/');
-  }
+  
 
+
+  app.post('/updateProfile/:email', async (req, res) => {
+    try {
+        await User.findByIdAndUpdate(req.params.id, {
+            $set: {
+                name: req.body.name,
+                email: req.body.email,
+                // Update other fields as needed
+            }
+        });
+
+        res.redirect('/dashboard'); // Redirect to the dashboard or profile page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+app.get('/updateProfile/:email', isAuthenticated,async (req, res) => {
+    console.log('Reached updateProfile route');
+
+    try {
+        const user = await Register.findById(req.params.id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        res.render('updateProfile', { user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.post('/logout', (req, res) => {
+    req.logout((err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Internal Server Error');
+        }
+        res.redirect('/');
+    });
+   
+});
 
 app.get('/',(req, res)=>{
     
-    res.render("index",{userName: res.locals.userName})
+    res.render("index",{ user: req.user })
 });
-app.get('/aboutus',(req, res)=>{
-    res.render("aboutus", {userName: res.locals.userName})
+app.get('/aboutus',isAuthenticated,(req, res)=>{
+    res.render("aboutus", { user: req.user })
 });
-app.get('/contactus',(req, res)=>{
-    res.render("contactus")
+app.get('/contactus',isAuthenticated,(req, res)=>{
+    res.render("contactus",{ user: req.user })
 });
-app.get('/news',(req, res)=>{
-    res.render("news")
+app.get('/news',isAuthenticated,(req, res)=>{
+    res.render("news",{ user: req.user })
 });
 app.get('/registration',(req, res)=>{
-    res.render("registration")
+    res.render("registration",{ user: req.user })
 });
-app.get('/schemes', (req,res)=>{
-    res.render('schemes')
+app.get('/schemes',isAuthenticated, (req,res)=>{
+    res.render('schemes',{ user: req.user })
 })
 app.get('/thanks', (req,res)=>{
     res.render('thanks')
@@ -299,8 +341,8 @@ app.get('/feedthanks',(req,res)=>{
 app.get('/login' ,(req,res)=>{
     res.render('login')
 })
-app.get('/getschemes',(req,res)=>{
-    res.render('getschemes')
+app.get('/getschemes',isAuthenticated,(req,res)=>{
+    res.render('getschemes',{ user: req.user })
 })
 app.get('/forgot',(req, res)=>{
     res.render('forgot');
@@ -321,6 +363,7 @@ app.get('/usernotfound',(req, res)=>{
 app.get('invalidtoken',(req, res)=>{
     res.render('invalidtoken');
 })
+
 
 
 
