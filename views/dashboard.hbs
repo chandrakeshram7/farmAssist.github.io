@@ -105,6 +105,20 @@ h5{
             margin-right: auto;
             width: 50%;
         }
+         .update-profile-btn {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Add hover effect */
+  }
+
+  /* Add a hover effect */
+  .update-profile-btn:hover {
+    background-color: #45a049;
+  }
 
     </style>
 </head>
@@ -118,7 +132,10 @@ h5{
             <img src="/public/images/{{user.image.filename}}" alt={{user.image.filename}} class="avatar">
             <h3>{{user.name}}</h3>
             <p >Email ID - <span style="color: #28a745; font-weight:bold">{{user.email}}</span></p>
-            
+            <form action="/dashboard">
+            <button class="update-profile-btn">Update Profile</button>
+
+            </form>
 
    
         </div>

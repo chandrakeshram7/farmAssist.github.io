@@ -161,11 +161,11 @@ input[type="password"]:focus {
 <label for="category">Select Category of Crop:<span style="color: red; font-weight:bolder">*</span></label>
         <select id="category" style="color: #333;" name="category" onchange="showSelectList()">
             <option value="" disabled selected>Select a category</option>
-            <option value="grains">Grains</option>
-            <option value="pulses">Pulses</option>
-            <option value="vegetables">Vegetables</option>
-			<option value="fruits">Fruits</option>
-			<option value="cashcrops">Cash Crops</option>
+            <option value="Grains">Grains</option>
+            <option value="Pulses">Pulses</option>
+            <option value="Vegetables">Vegetables</option>
+			<option value="Fruits">Fruits</option>
+			<option value="Cash Crops">Cash Crops</option>
         </select>
         <br>
 
@@ -173,12 +173,12 @@ input[type="password"]:focus {
             <label for="grain">Select Grain:</label>
             <select id="grain" style="color: #333;" name="subcategory">
             <option value="" disabled selected>Select a grain</option>
-                <option value="wheat">Wheat</option>
-                <option value="rice">Rice</option>
-                <option value="corn">Corn</option>
-				<option value="millet">Millet</option>
-				<option value="oats">Oats</option>
-				<option value="barley">Barley</option>
+                <option value="Wheat">Wheat</option>
+                <option value="Rice">Rice</option>
+                <option value="Corn">Corn</option>
+				<option value="Millet">Millet</option>
+				<option value="Oats">Oats</option>
+				<option value="Barley">Barley</option>
 				
                 
             </select>
@@ -188,12 +188,12 @@ input[type="password"]:focus {
             <label for="pulse">Select Pulse:</label>
             <select id="pulse" style="color: #333;" name="subcategory">
             <option value="" disabled selected>Select a pulse</option>
-                <option value="lentils">Lentils</option>
-                <option value="chickpeas">Chickpeas</option>
-                <option value="beans">Beans</option>
-                <option value="peas">Green Peas</option>
-                <option value="chana">Chana Dal</option>
-                <option value="mung">Mung Beans</option>
+                <option value="Lentils">Lentils</option>
+                <option value="Chickpeas">Chickpeas</option>
+                <option value="Beans">Beans</option>
+                <option value="Green Peas">Green Peas</option>
+                <option value="Chana Dal">Chana Dal</option>
+                <option value="Mung Beans">Mung Beans</option>
 
             </select>
         </div>
@@ -203,14 +203,14 @@ input[type="password"]:focus {
             <select id="vegetable" style="color: #333;" name="subcategory">
             <option value="" disabled selected>Select a vegetable</option>
 
-                <option value="carrot">Carrot</option>
-                <option value="broccoli">Broccoli</option>
-                <option value="tomato">Tomato</option>
-                <option value="spinach">Spinach</option>
-                <option value="cucumber">Cucumber</option>
-                <option value="onion">Onion</option>
-                <option value="chilli">Chilli</option>
-                <option value="leafy">Leafy Vegetables</option>
+                <option value="Carrot">Carrot</option>
+                <option value="Broccoli">Broccoli</option>
+                <option value="Tomato">Tomato</option>
+                <option value="Spinach">Spinach</option>
+                <option value="Cucumber">Cucumber</option>
+                <option value="Onion">Onion</option>
+                <option value="Chilli">Chilli</option>
+                <option value="Leafy Vegetables">Leafy Vegetables</option>
 
                
             </select>
@@ -220,13 +220,13 @@ input[type="password"]:focus {
             <select id="fruit" style="color: #333;" name="subcategory">
             <option value="" disabled selected>Select a fruit</option>
 
-                <option value="apple">Apple</option>
-                <option value="banana">Banana</option>
-                <option value="orange">Orange</option>
-                <option value="strawberry">Strawberry</option>
-                <option value="grapes">Grapes</option>
-                <option value="mango">Mango</option>
-                <option value="chickoo">Chickoo</option>
+                <option value="Apple">Apple</option>
+                <option value="Banana">Banana</option>
+                <option value="Orange">Orange</option>
+                <option value="Strawberry">Strawberry</option>
+                <option value="Grapes">Grapes</option>
+                <option value="Mango">Mango</option>
+                <option value="Chickoo">Chickoo</option>
                 <option value="Kiwi">Kiwi</option>
 
                 <!-- Add more vegetables as needed -->
@@ -238,14 +238,14 @@ input[type="password"]:focus {
             <select id="cashcrops" style="color: #333;" name="subcategory">
             <option value="" disabled selected>Select a category</option>
 
-                <option value="cotton">Cotton</option>
-                <option value="tobacco">Tobacco</option>
-                <option value="coffee">Coffee</option>
-                <option value="tea">Tea</option>
-                <option value="sugarcane">Sugarcane</option>
-                <option value="rubber">Rubber</option>
-                <option value="cocoa">Cocoa</option>
-                <option value="spices">Spices</option>
+                <option value="Cotton">Cotton</option>
+                <option value="Tobacco">Tobacco</option>
+                <option value="Coffee">Coffee</option>
+                <option value="Tea">Tea</option>
+                <option value="Sugarcane">Sugarcane</option>
+                <option value="Rubber">Rubber</option>
+                <option value="Cocoa">Cocoa</option>
+                <option value="Spices">Spices</option>
 
                 <!-- Add more vegetables as needed -->
             </select>
@@ -460,15 +460,15 @@ input[type="password"]:focus {
 			document.getElementById('cashcropsSelect').style.display ='none'
 
             // Show the select list based on the selected category
-            if (selectedCategory === 'grains') {
+            if (selectedCategory === 'Grains') {
                 document.getElementById('grainSelect').style.display = 'block';
-            } else if (selectedCategory === 'pulses') {
+            } else if (selectedCategory === 'Pulses') {
                 document.getElementById('pulseSelect').style.display = 'block';
-            } else if (selectedCategory === 'vegetables') {
+            } else if (selectedCategory === 'Vegetables') {
                 document.getElementById('vegetableSelect').style.display = 'block';
-            } else if(selectedCategory === 'fruits'){
+            } else if(selectedCategory === 'Fruits'){
 				document.getElementById('fruitsSelect').style.display = 'block';
-			} else if(selectedCategory === 'cashcrops'){
+			} else if(selectedCategory === 'Cash Crops'){
 				document.getElementById('cashcropsSelect').style.display = 'block';
 			}
         }
