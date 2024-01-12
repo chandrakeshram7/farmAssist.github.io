@@ -34,7 +34,7 @@
             transform: scale(1.02);
         }
 
-        input[type="number"], input[type="password"] {
+        input[type="text"], input[type="password"] {
                 width: 90%;
                 margin-bottom: 10px;
                 border: 1px solid #ddd;
@@ -61,7 +61,7 @@
             justify-content: center;
             margin-left: 1rem;
         }
-        .form-container input[type="number"], input[type="password"] {
+        .form-container input[type="text"], input[type="password"] {
             align-items: center;
             justify-content: center;
             margin-left: .5rem;
@@ -88,13 +88,14 @@
             <img src="forgot.avif" alt="" height="440px" width="350px">
         </div>
         <div class="form-container">
-            <h2 style="text-align:center; color:#357f39;font-size:2rem">Forgot Password</h2>
-            <form>
-                <input type="number" placeholder="Mobile No." required>
-                <input type="password" placeholder="New Password" required>
-                <button type="submit" class="submit-btn">Reset Password</button>
+            <h2 style="text-align:center; color:#357f39;font-size:2rem" >Forgot Password</h2>
+            <form method="post" action="/forgot">
+                <input type="text" name="email" placeholder="Enter Your Email ID" >
+                <a href="{{ resetLink }}" target="_blank" style="text-decoration: none; color:white;">
+                <button type="submit" class="submit-btn">Send Password Reset Link</button>
+                </a>                
                 <button type="submit"  class="submit-btn"><a href="/login" style="text-decoration: none; color:white;">Back To Login</a></button>
-
+                <p>{{resetLink}}</p>
             </form>
         </div>
     </div>

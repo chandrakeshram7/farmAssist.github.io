@@ -18,11 +18,11 @@
             justify-content: center;
             align-items: center;
             height: 80vh;
-            margin: 1rem 1rem;
+            margin: 0rem 0rem;
         }
 
         .user-card {
-            width: 350px;
+            width: 400px;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -46,9 +46,7 @@
     text-align: center;
 }
 
-        .user-card:hover {
-            transform: scale(1.05);
-        }
+        
         h5:hover{
         background-color: #c5c5c5;
         color: black;
@@ -60,35 +58,126 @@ h5{
      padding-left: 1rem;
      padding-top: 0.5rem;
 }
+     section {
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .classic-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .classic-table th, .classic-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .classic-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .fadein {
+            animation: fadein 2s;
+        }
+
+        /* New CSS styling */
+        header {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        {{!-- section {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        } --}}
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
     </style>
 </head>
 <body>
      {{>navbar}}
+      {{!-- <img src="/public/images/{{user.image.filename}}" alt={{user.image.filename}} class="avatar"> --}}
     
-    <div class="main" style="display: flex; align-items:center;justify-content:center">
+    <div class="main" style="display: flex; align-items:center; justify-content:center">
         <div class="dashboard-container">
-        <div class="user-card" id="userCard">
+        <div class="user-card" id="userCard" style="align-items: center;justify-content:center;padding-top:5rem">
             <img src="/public/images/{{user.image.filename}}" alt={{user.image.filename}} class="avatar">
-            <h2>Name : {{user.name}}</h2>
+            <h3>{{user.name}}</h3>
+            <p >Email ID - <span style="color: #28a745; font-weight:bold">{{user.email}}</span></p>
             
+
+   
         </div>
-    
+    </div>
     <div class="dashboard-container">
         <div class="user-card" id="userCard">
-            <h1>User Data</h1>
-            <p>Mobile No. : {{user.mobile}}</p>
-            <p>Age : {{user.age}}</p>
-            <p>Income : {{user.income}}</p>
-            <p>Crop Type I Cultivate : {{user.category}}</p>
-            <p>Crop I Cultivate : {{user.subcategory}}</p>
-            <p>District :  {{user.category}} &nbsp; Pincode : {{user.pincode}}</p>
-            <p>Field Size of my Farm : {{user.fieldsize}}</p>
+            <h1 style="font-weight: bolder; color:#28a745; ">My Profile</h1>
+            <section>
+            <table class="classic-table fadein">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>User Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mobile No.</td>
+                        <td>{{user.mobile}}</td>
+                    </tr>
+                    <tr>
+                        <td>Age</td>
+                        <td>{{user.age}}</td>
+                    </tr>
+                    <tr>
+                        <td>Income</td>
+                        <td>{{user.income}}</td>
+                    </tr>
+                    <tr>
+                        <td>Crop Type</td>
+                        <td>{{user.category}}</td>
+                    </tr>
+                    <tr>
+                        <td>Crop Name</td>
+                        <td>{{user.subcategory}}</td>
+                    </tr>
+                    <tr>
+                        <td>District</td>
+                        <td>{{user.district}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pin Code</td>
+                        <td>{{user.pincode}}</td>
+                    </tr>
+                    <tr>
+                        <td>Field Size</td>
+                        <td>{{user.fieldsize}}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </section>
 
    
         </div>
     </div>
     </div>
-    </div>
+    
+    
     <footer>
         <p>&copy; 2023 FarmAssist. All rights reserved.</p>
     </footer>

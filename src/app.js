@@ -21,19 +21,109 @@ app.set("view engine","hbs")
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const flash = require('express-flash');
-
+const mailer = require('../src/mailer');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 app.use(session({ secret: '123456789', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail', // use the appropriate email service
+    auth: {
+      user: 'chandrakeshram31@gmail.com', // your email address
+      pass: 'xskj ajof ubkl shdx', // your email password or app-specific password
+    },
+  });
+  
+
+//============================================================================
+//Forgot Password Implementation
+app.post('/forgot', async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+      const user = await Register.findOne({ email });
+   
+      if (!user) {
+        res.render('usernotfound');
+      }
+      
+  
+      // Generate a unique reset token
+      const resetToken = crypto.randomBytes(32).toString('hex');
+      
+      // Set an expiration time (e.g., 1 hour from now)
+      const expirationTime = Date.now() + 3600000; // 1 hour in milliseconds
+  
+      // Update the user's resetToken and resetTokenExpiration in the database
+      user.resetToken = resetToken;
+      user.resetTokenExpiration = expirationTime;
+      await user.save();
+  
+      // Send a password reset email with the reset link
+      const resetLink = `http://localhost:3000/reset?token=${resetToken}`;
+      const emailSubject = 'Password Reset';
+      const emailBody = `Click on the following link to reset your password: ${resetLink}`;
+      console.log('Reset Token:', resetToken);
+      console.log('Expiration Time:', new Date(expirationTime).toLocaleString());
+      
+
+// Inside the '/reset' route before saving the user's new password
+     console.log('User Found:', user);
+     
+      await transporter.sendMail({
+        from: 'chandrakeshram31@gmail.com',
+        to: email,
+        subject: emailSubject,
+        html: emailBody, 
+      });
+  
+      res.render('forgotmess')
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+  app.post('/reset', async (req, res) => {
+    const { token, currpassword } = req.body;
+    
+    try {
+      const user = await Register.findOne({
+        resetToken: token,
+        resetTokenExpiration: { $gt: Date.now() },
+      });
+  
+      if (!user) {
+         res.render('invalidtoken')
+      }
+  
+      // Update the user's password
+      const hashedPassword = await bcrypt.hash(currpassword, 10);
+      user.password = hashedPassword;
+      user.resetToken = undefined;
+      user.resetTokenExpiration = undefined;
+      await user.save();
+  
+      res.render('passwordreset')
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+
+
 //=======================================
 passport.use(new LocalStrategy(
-    {usernameField: 'mobile',passwordField: 'password', passReqToCallback: true },
-    async (req, mobile, password, done)=>{
+    {usernameField: 'email',passwordField: 'password', passReqToCallback: true },
+    async (req, email, password, done)=>{
         try{
-            const user = await Register.findOne({mobile});
+            const user = await Register.findOne({email});
             if(!user){
-                req.flash('error', 'Incorrect Mobile Number or Password');
+                req.flash('error', 'Incorrect Email ID or Password');
                return done(null, false); 
             }
             // password = await securePassword(password);
@@ -41,7 +131,7 @@ passport.use(new LocalStrategy(
             console.log('Entered Password:', password);
             const passwordMatch = await bcrypt.compare(password, user.password);
             if(!passwordMatch){
-                req.flash('error', 'Incorrect Password or User Mobile Number');
+                req.flash('error', 'Incorrect Email ID or Password');
                 return done(null, false);
 
             }
@@ -55,12 +145,12 @@ passport.use(new LocalStrategy(
     }
 ))
 passport.serializeUser((user, done) => {
-    done(null, user.mobile);
+    done(null, user.email);
   });
 
-  passport.deserializeUser(async (mobile, done) => {
+  passport.deserializeUser(async (email, done) => {
     try {
-      const user = await Register.findOne({mobile});
+      const user = await Register.findOne({email});
       done(null, user);
     } catch (error) {
       done(error);
@@ -88,34 +178,6 @@ let upload = multer({
 })
 
 
-// app.get('/',(req, res)=>{
-//     res.render("index")
-// });
-// app.get('/aboutus',(req, res)=>{
-//     res.render("aboutus")
-// });
-// app.get('/contactus',(req, res)=>{
-//     res.render("contactus")
-// });
-// app.get('/news',(req, res)=>{
-//     res.render("news")
-// });
-// app.get('/registration',(req, res)=>{
-//     res.render("registration")
-// });
-// app.get('/schemes', (req,res)=>{
-//     res.render('schemes')
-// })
-// app.get('/thanks', (req,res)=>{
-//     res.render('thanks')
-// })
-// app.get('/feedthanks',(req,res)=>{
-//     res.render('feedthanks')
-// })
-// app.get('/login' ,(req,res)=>{
-//     res.render('login')
-// })
-
 
 
 
@@ -138,6 +200,7 @@ app.post('/registration',upload.single('image'),async (req, res)=>{
 
             const newFarmer = new Register({
                 name : req.body.name,
+                email: req.body.email,
                 mobile: req.body.mobile,
                 age: req.body.age,
                 income: req.body.income,
@@ -206,52 +269,7 @@ app.post('/login', passport.authenticate('local', {
     }
     res.redirect('/');
   }
-// app.post('/login', async (req, res) => {
-//     const mobile = req.body.mobile;
-//     const password = req.body.password;
 
-//     // Check credentials in MongoDB
-//     try{
-//         // const user = await Register.findOne({ mobile});
-        
-       
-//         // if(user && password == user.currpassword){
-//         //     res.render('index',{error:""})
-//         // }
-//         // else{
-//         //     res.render('login', { error: 'Incorrect password. Please try again.' })
-//         // }
-//         const user = await Register.findOne({ mobile });
-        
-//         if (user) {
-//             // Compare entered password with stored password
-//             const passwordMatch = await bcrypt.compare(password, user.currpassword);
-//             if (passwordMatch) {
-//                 // Store user information in the session
-//                 req.session.user = req.session.user || {};
-                
-//                 req.session.user.name = user.name;
-//                 app.use((req, res, next) => {
-//                     res.locals.userName = req.session.user.name;
-//                     next();
-//                     console.log('Session after login:', req.session);
-
-//                 });
-//                 res.render('index', {error:"", userName:user.name} );
-//                 userName = user.name;
-                
-//             } else {
-//                 res.render('login', { error: 'Incorrect password. Please try again.' })
-//             }
-//         } else {
-//             res.render('login', { error: 'User Not found! Please try again' })
-//         }
-    
-//     }catch(error){
-//         console.error(error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
 
 app.get('/',(req, res)=>{
     
@@ -287,9 +305,22 @@ app.get('/getschemes',(req,res)=>{
 app.get('/forgot',(req, res)=>{
     res.render('forgot');
 })
-
-
-
+app.get('/reset', (req, res) => {
+    const resetToken = req.query.token;
+    res.render('reset', { resetToken });
+});
+app.get('/forgotmess',(req, res)=>{
+    res.render('forgotmess');
+})
+app.get('/passwordreset', (req,res)=>{
+    res.render('passwordreset');
+})
+app.get('/usernotfound',(req, res)=>{
+    res.render('usernotfound');
+})
+app.get('invalidtoken',(req, res)=>{
+    res.render('invalidtoken');
+})
 
 
 

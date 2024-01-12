@@ -4,6 +4,11 @@ const farmerData = new mongoose.Schema({
         type: String,
         required:true
     },
+    email:{
+        type:String,
+        required:true,
+        unique:true
+    },
     mobile:{
         type: String,
         required:true,
@@ -47,7 +52,9 @@ const farmerData = new mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    resetToken: String,
+    resetTokenExpiration: Date,
 
 
 

@@ -146,6 +146,9 @@ input[type="password"]:focus {
 <label for="">Enter Your Name <span style="color: red; font-weight:bolder">*</span></label>
 <input type="text" name="name" title="Please enter at least 3 characters, using only letters " style="margin-bottom: 10px;" required id="userName" pattern="[a-zA-Z ]{3,}">
  <span id="error-name" style="color: red;"></span><br><br>	
+<label for="">Enter Your Email ID  <span style="color: red; font-weight:bolder">*</span></label>
+<input type="email" name="email" style="margin-bottom: 10px;" id="userEmail"  title="Please enter a valid Email ID" required>
+ <span id="error-email" style="color: red;"></span><br><br>	
 <label for="">Enter Your Mobile Number  <span style="color: red; font-weight:bolder">*</span></label>
 <input type="text" name="mobile" style="margin-bottom: 10px;" id="phoneNumber" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" required>
  <span id="error-message" style="color: red;"></span><br><br>	
@@ -366,6 +369,32 @@ input[type="password"]:focus {
 	   //Password Validation for checking appropriateness of the password
 
 //==========================================================================================================================
+
+    (function () {
+  const emailInput = document.getElementById('userEmail');
+  const emailError = document.getElementById('error-email');
+
+  emailInput.addEventListener('input', () => {
+    const email = emailInput.value;
+
+    // Validate email format
+    if (!isValidEmail(email)) {
+      emailError.textContent = 'Invalid email format.';
+    } else {
+      emailError.textContent = ''; // Clear the error message if email is valid
+    }
+  });
+
+  function isValidEmail(email) {
+    // Use a regular expression or other validation logic
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+})();
+
+
+
+
+
 
 		document.getElementById('age').addEventListener('input', function(){
 			const userAge = this;

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            height: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+            transition: 2s;
+        }
+        .container:hover{
+            transform: scale(1.02);
+        }
+
+        input[type="hidden"], input[type="password"] {
+                width: 90%;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                outline: none;
+                border-radius: 3px;
+                padding: 8px;;
+                font-size:1rem;
+        }
+
+        .submit-btn {
+            width: 90%;
+            padding: 8px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size:1rem;
+
+        }
+        .form-container .submit-btn{
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+        }
+        .form-container input[type="hidden"], input[type="password"] {
+            align-items: center;
+            justify-content: center;
+            
+            margin: auto;
+        }
+
+        .submit-btn:hover {
+            background-color: #255d28;
+        }
+        .form-img-container{
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            height: 440px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+            transition: 2s;
+            
+        }
+        .login-container input[type=text] , .login-container input[type=password]{
+            background-color: #ebe1e1;
+        }
+        .login-container input[type=text] , .login-container input[type=password]:focus{
+            background-color: #ebe1e1;
+            border: none;
+            outline: none;
+
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-img-container">
+            <img src="forgot.avif" alt="" height="440px" width="350px">
+        </div>
+        <div class="form-container">
+            <h2 style="text-align:center; color:#357f39;font-size:2rem; font-family:Arial, sans-serif">Reset Password</h2>
+            <form method="post" action="/reset">
+                <input type="hidden" name="token" value="{{ resetToken }}">
+                <label for="" style="font-family:Arial, sans-serif">Enter Your New Password <span style="color: red; font-weight:bolder">*</span></label>
+                <input type="password" name="currpassword" id="cpass"  required >
+                <span id="error-password" style="color: red;"></span><br><br>	
+                <label for="" style="font-family:Arial, sans-serif">Confirm Your New Password <span style="color: red; font-weight:bolder">*</span></label>
+                <input type="password" name="confpassword" id="confpass"  onkeyup="check(this)" required >
+                <error id="err" style="color: red;"></error>
+
+                <button type="submit" class="submit-btn">Reset Your Password</button>
+                                    
+            </form>
+        </div>
+    </div>
+    <script>
+        const passwordInput = document.getElementById('cpass');
+		const passwordError = document.getElementById('error-password');
+		passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+        const isValid = /(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])(?=.*[0-9])(?=.*[A-Z]).{8,}/.test(password);
+       passwordError.textContent = isValid ? '' : 'Password must contain at least one special character, one number, and one uppercase letter. Minimum length is 8 characters.';
+       });
+
+       let pass = document.getElementById('cpass');
+  function check(elem){
+    if(elem.value.length > 0 ){
+      if(elem.value != pass.value){
+        document.getElementById('err').innerText ='Password do not match';
+      }
+      else {
+        document.getElementById('err').innerText =''
+      }
+    }
+  }
+    </script>
+    
+</body>
+</html>
