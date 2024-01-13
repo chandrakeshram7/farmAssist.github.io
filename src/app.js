@@ -268,39 +268,71 @@ app.post('/login', passport.authenticate('local', {
     res.render('dashboard', { user: req.user });
     
   });
-  
-
-
-  app.post('/updateProfile/:email', async (req, res) => {
+ 
+  app.post('/updateProfile', upload.single('image'), async (req, res) => {
     try {
-        await User.findByIdAndUpdate(req.params.id, {
-            $set: {
-                name: req.body.name,
-                email: req.body.email,
-                // Update other fields as needed
-            }
-        });
+       // Check if the user is logged in
+      
+   
+       // Update the user's profile information in the database
+       const updateObject = {
+        $set: {
+            name: req.body.name,
+            email: req.body.email,
+            mobile: req.body.mobile,
+            age: req.body.age,
+            income: req.body.income,
+            category: req.body.category,
+            subcategory: req.body.subcategory,
+            district: req.body.district,
+            pincode: req.body.pincode,
+            fieldsize: req.body.fieldsize,
+        },
+    };
 
-        res.redirect('/dashboard'); // Redirect to the dashboard or profile page
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+    // If there's a file uploaded, update the image information
+    if (req.file) {
+        updateObject.$set.image = {
+            filename: req.file.filename,
+            path: req.file.path,
+            size: req.file.size,
+        };
     }
-});
-app.get('/updateProfile/:email', isAuthenticated,async (req, res) => {
-    console.log('Reached updateProfile route');
+    console.log('User ID:', req.user.email);
+    console.log('Request Body:', req.body);
+    // Update the user's profile information in the database
+    await Register.updateOne(
+        
+        { email: req.user.email },
+        updateObject
+    );
 
-    try {
-        const user = await Register.findById(req.params.id);
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
-        res.render('updateProfile', { user });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+   
+       // Update the session information with the new data
+       req.session.name = req.body.name;
+       req.session.email = req.body.email;
+       req.session.mobile = req.body.mobile;
+       req.session.age = req.body.age;
+       req.session.income = req.body.income;
+       req.session.category = req.body.category;
+       req.session.district = req.body.district;
+       req.session.pincode = req.body.pincode;
+       req.session.fieldsize = req.body.fieldsize;
+       req.session.mobile = req.body.mobile;
+       if (req.file) {
+        req.session.image = req.file.filename;
     }
-});
+   
+       // Redirect to the dashboard page
+       res.redirect('/dashboard');
+    } catch (err) {
+       console.error(err);
+       res.send('An error occurred. Please try again later.');
+    }
+   });
+app.get('/updateProfile',isAuthenticated,(req, res)=>{
+    res.render('updateProfile', {user:req.user});
+})
 
 app.post('/logout', (req, res) => {
     req.logout((err) => {
