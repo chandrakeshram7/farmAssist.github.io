@@ -47,7 +47,9 @@ app.post('/forgot', async (req, res) => {
       const user = await Register.findOne({ email });
    
       if (!user) {
+        console.log('User Nhi Mila')
         res.render('usernotfound');
+        return;
       }
       
   
@@ -392,7 +394,7 @@ app.get('/passwordreset', (req,res)=>{
 app.get('/usernotfound',(req, res)=>{
     res.render('usernotfound');
 })
-app.get('invalidtoken',(req, res)=>{
+app.get('/invalidtoken',(req, res)=>{
     res.render('invalidtoken');
 })
 
