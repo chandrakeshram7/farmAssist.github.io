@@ -8,9 +8,9 @@ const hbs = require('hbs');
 const session = require('express-session');
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser');
-require('./db/conn');
-const Register= require('./models/registration')
-const Feedback = require('./models/feedback')
+require('./src/db/conn');
+const Register= require('./src/models/registration')
+const Feedback = require('./src/models/feedback')
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:false}));
 const view_path = path.join(__dirname,'../views');
