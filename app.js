@@ -13,8 +13,8 @@ const Register= require('./src/models/registration')
 const Feedback = require('./src/models/feedback')
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:false}));
-const view_path = path.join(__dirname,'../views');
-const partial_path = path.join(__dirname,'../partials');
+const view_path = path.join(__dirname,'./views');
+const partial_path = path.join(__dirname,'./partials');
 hbs.registerPartials(partial_path);
 app.use(express.static(view_path));
 app.set("view engine","hbs")
