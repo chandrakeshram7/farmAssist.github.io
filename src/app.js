@@ -8,13 +8,13 @@ const hbs = require('hbs');
 const session = require('express-session');
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser');
-require('./db/conn');
-const Register= require('./models/registration')
-const Feedback = require('./models/feedback')
+require('./src/db/conn');
+const Register= require('./src/models/registration')
+const Feedback = require('./src/models/feedback')
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:false}));
-const view_path = path.join(__dirname,'../views');
-const partial_path = path.join(__dirname,'../partials');
+const view_path = path.join(__dirname,'/views');
+const partial_path = path.join(__dirname,'/partials');
 hbs.registerPartials(partial_path);
 app.use(express.static(view_path));
 app.set("view engine","hbs")
@@ -29,6 +29,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+
+
+
 const transporter = nodemailer.createTransport({
     service: 'gmail', // use the appropriate email service
     auth: {
@@ -36,6 +39,10 @@ const transporter = nodemailer.createTransport({
       pass: 'xskj ajof ubkl shdx', // your email password or app-specific password
     },
   });
+
+
+
+
   
 
 //============================================================================
