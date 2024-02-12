@@ -166,7 +166,7 @@ passport.serializeUser((user, done) => {
 //Foe Image Uploading and Storage Settings - Using Multer
 const multer = require('multer');
 let Storage = multer.diskStorage({
-    destination:'./public/images/',
+    destination:'./user_photos/images/',
     filename: (req,file, cb)=>{
         // cb(null, Date.now(+file.originalname))
         cb(null, file.originalname)
