@@ -47,7 +47,6 @@ app.post('/forgot', async (req, res) => {
       const user = await Register.findOne({ email });
    
       if (!user) {
-        console.log('User Nhi Mila')
         res.render('usernotfound');
         return;
       }
