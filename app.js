@@ -21,7 +21,7 @@ app.set("view engine","hbs")
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const flash = require('express-flash');
-const mailer = require('../src/mailer');
+const mailer = require('./src/mailer');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 app.use(session({ secret: '123456789', resave: false, saveUninitialized: false }));
