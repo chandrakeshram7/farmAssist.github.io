@@ -23,7 +23,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const flash = require('express-flash');
 const mailer = require('./src/mailer');
 const crypto = require('crypto');
-const base64Image = user.image.data.toString('base64');
 const nodemailer = require('nodemailer');
 app.use(session({ secret: '123456789', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
@@ -265,6 +264,7 @@ app.post('/login', passport.authenticate('local', {
 
   app.get('/dashboard', isAuthenticated, (req, res) => {
     console.log('Is Authenticated:', req.isAuthenticated());
+    const base64Image = req.user.image.data.toString('base64');
 
     // Access user's name using req.user.name
     console.log('User Name:', req.user.name);
