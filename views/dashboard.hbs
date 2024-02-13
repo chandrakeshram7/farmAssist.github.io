@@ -129,7 +129,7 @@ h5{
     <div class="main" style="display: flex; align-items:center; justify-content:center">
         <div class="dashboard-container">
         <div class="user-card" id="userCard" style="align-items: center;justify-content:center;padding-top:5rem">
-            <img src="data:{{user.image.contentType}};base64,{{base64Image}}" alt="{{user.image.filename}}" class="avatar">
+<img src="data:{{user.profilePicture.contentType}};base64,{{user.profilePicture.data.toString('base64')}}" alt="User Image" class="avatar">
 
             <h3>{{user.name}}</h3>
             <p >Email ID - <span style="color: #28a745; font-weight:bold">{{user.email}}</span></p>

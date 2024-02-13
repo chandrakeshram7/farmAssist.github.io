@@ -217,7 +217,7 @@ app.post('/registration',upload.single('image'),async (req, res)=>{
                 fieldsize : req.body.fieldsize,
                 image: {
                     filename: req.file.originalname,
-                    contentType: req.file.contentType,
+                    contentType: req.file.mimetype,
                     data: req.file.buffer,
                     size: req.file.size,
                   },
@@ -264,11 +264,11 @@ app.post('/login', passport.authenticate('local', {
 
   app.get('/dashboard', isAuthenticated, (req, res) => {
     console.log('Is Authenticated:', req.isAuthenticated());
-    const base64Image = req.user.image.data.toString('base64');
+    // const base64Image = req.user.image.data.toString('base64');
 
     // Access user's name using req.user.name
     console.log('User Name:', req.user.name);
-    res.render('dashboard', { user: req.user , base64Image });
+    res.render('dashboard', { user: req.user  });
     
   });
  
