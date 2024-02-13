@@ -46,8 +46,9 @@ const farmerData = new mongoose.Schema({
     },
     image: {
         filename: String,
-        path: String,
+        data:Buffer,
         size: Number,
+        contentType: String
       },
     password:{
         type:String,

@@ -217,8 +217,8 @@ app.post('/registration',upload.single('image'),async (req, res)=>{
                 fieldsize : req.body.fieldsize,
                 image: {
                     filename: req.file.originalname,
-                    mimetype: req.file.mimetype,
-                    buffer: req.file.buffer,
+                    contentType: req.file.contentType,
+                    data: req.file.buffer,
                     size: req.file.size,
                   },
                
