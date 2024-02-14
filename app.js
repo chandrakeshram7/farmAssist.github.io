@@ -271,7 +271,7 @@ app.post('/login', passport.authenticate('local', {
 const templateData = {
   user: {
     image: {
-      contentType: user.image.contentType,
+      contentType: req.user.image.contentType,
       data: base64EncodedData,
     },
   },
