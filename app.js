@@ -261,11 +261,12 @@ app.post('/login', passport.authenticate('local', {
     failureFlash: true,
   }));
 
-
   app.get('/dashboard', isAuthenticated, (req, res) => {
     console.log('Is Authenticated:', req.isAuthenticated());
   
     if (req.user && req.user.image) {
+      console.log('User object:', req.user);
+      
       // Assuming user.image.data is a Buffer
       const base64EncodedData = Buffer.from(req.user.image.data).toString('base64');
   
