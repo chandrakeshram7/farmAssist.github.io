@@ -264,21 +264,27 @@ app.post('/login', passport.authenticate('local', {
 
   app.get('/dashboard', isAuthenticated, (req, res) => {
     console.log('Is Authenticated:', req.isAuthenticated());
-    // const base64Image = req.user.image.data.toString('base64');
-
-    // Access user's name using req.user.name
-    const base64EncodedData = Buffer.from(req.user.image.data).toString('base64');
-const templateData = {
-  user: {
-    image: {
-      contentType: req.user.image.contentType,
-      data: base64EncodedData,
-    },
-  },
-};
-    console.log('User Name:', req.user.name);
-    res.render('dashboard', { user: req.user , templateData  });
-    
+  
+    if (req.user && req.user.image) {
+      // Assuming user.image.data is a Buffer
+      const base64EncodedData = Buffer.from(req.user.image.data).toString('base64');
+  
+      const templateData = {
+        user: {
+          image: {
+            contentType: req.user.image.contentType,
+            data: base64EncodedData,
+          },
+        },
+      };
+  
+      console.log('User Name:', req.user.name);
+      res.render('dashboard', { user: req.user, templateData });
+    } else {
+      // Handle the case when req.user or req.user.image is undefined
+      console.error('Error: req.user or req.user.image is undefined');
+      res.status(500).send('Internal Server Error');
+    }
   });
  
   app.post('/updateProfile', upload.single('image'), async (req, res) => {
