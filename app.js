@@ -287,6 +287,8 @@ app.post('/login', passport.authenticate('local', {
       res.status(500).send('Internal Server Error');
     }
   });
+  
+  
  
   app.post('/updateProfile', upload.single('image'), async (req, res) => {
     try {
