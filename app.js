@@ -1,6 +1,4 @@
 //Controller Logic MVC Architeture
-
-
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -24,7 +22,7 @@ const flash = require('express-flash');
 const mailer = require('./src/mailer');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-app.use(session({ secret: '123456789', resave: false, saveUninitialized: false }));
+app.use(session({ secret: 'klajjdfljalfjalijr3243kfkkds', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
