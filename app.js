@@ -267,8 +267,17 @@ app.post('/login', passport.authenticate('local', {
     // const base64Image = req.user.image.data.toString('base64');
 
     // Access user's name using req.user.name
+    const base64EncodedData = Buffer.from(req.user.image.data).toString('base64');
+const templateData = {
+  user: {
+    image: {
+      contentType: user.image.contentType,
+      data: base64EncodedData,
+    },
+  },
+};
     console.log('User Name:', req.user.name);
-    res.render('dashboard', { user: req.user  });
+    res.render('dashboard', { user: req.user , templateData  });
     
   });
  
