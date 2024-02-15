@@ -22,7 +22,14 @@ const flash = require('express-flash');
 const mailer = require('./src/mailer');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-app.use(session({ secret: 'klajjdfljalfjalijr3243kfkkds', resave: false, saveUninitialized: false }));
+const MongoStore = require('connect-mongodb-session')(session);
+app.use(session({ secret: 'klajjdfljalfjalijr3243kfkkds', resave: false, saveUninitialized: false,  store: new MongoStore({ uri: 'mongodb+srv://chandrakeshram:chandrakesh@cluster1.4ctnohd.mongodb.net/farmerData', collection: 'sessions',cookie: {
+    path: '/',
+    httpOnly: true,
+    secure: false, // Set to true if using HTTPS
+    maxAge: 1000 * 60 * 60 * 24
+  } }),
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
