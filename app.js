@@ -69,7 +69,7 @@ app.post('/forgot', async (req, res) => {
       await user.save();
   
       // Send a password reset email with the reset link
-      const resetLink = `http://localhost:3000/reset?token=${resetToken}`;
+      const resetLink = `https://farm-assist-github-io.vercel.app/reset?token=${resetToken}`;
       const emailSubject = 'Password Reset';
       const emailBody = `Click on the following link to reset your password: ${resetLink}`;
       console.log('Reset Token:', resetToken);
