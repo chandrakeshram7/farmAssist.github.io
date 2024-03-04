@@ -192,7 +192,7 @@ function isAuthenticated(req, res, next) {
 
 
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const securePassword = async (password)=>{
     try{
         const passwordHash = await bcrypt.hash(password,10);
