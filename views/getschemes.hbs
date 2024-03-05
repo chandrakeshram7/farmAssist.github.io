@@ -238,7 +238,7 @@ h5{
 
             try {
                 // Make a POST request to the backend API
-                const response = await axios.post('http://localhost:5000/getschemes', formData);
+                const response = await axios.post('https://ml-model1-three.vercel.app/getschemes', formData);
 
                 // Handle the response, update UI, etc.
                 console.log(response.data);
