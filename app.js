@@ -36,6 +36,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+const corsOptions = {
+    origin: 'https://ml-model1-three.vercel.app/', // Replace with your Vercel domain
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Enable credentials (if needed)
+    optionsSuccessStatus: 204, // Set the preflight response status to 204
+  };
+  
+  app.use(cors(corsOptions));
+
+
 const transporter = nodemailer.createTransport({
     service: 'gmail', // use the appropriate email service
     auth: {
