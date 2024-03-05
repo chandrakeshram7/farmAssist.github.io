@@ -439,7 +439,7 @@ app.get('/aboutus',isAuthenticated,(req, res)=>{
 app.get('/contactus',isAuthenticated,(req, res)=>{
     res.render("contactus",{ user: req.user })
 });
-app.get('/news',isAuthenticated,(req, res)=>{
+app.get('/news',isAuthenticated,cors(),(req, res)=>{
     res.render("news",{ user: req.user })
 });
 app.get('/registration',(req, res)=>{
