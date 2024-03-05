@@ -190,69 +190,90 @@ h5{
   </div>
   <main>
     <form id="userForm">
-      <label for="farmSize">Farm Size (in acres):</label>
-      <input type="number" id="farmSize" name="farmSize" required>
+            <label for="cropType">Crop Type:</label>
+            <input type="text" id="cropType" name="cropType" required>
 
-      <label for="cropType">Main Crop Type:</label>
-      <input type="text" id="cropType" name="cropType" required>
+            <label for="cropName">Crop Name:</label>
+            <input type="text" id="cropName" name="cropName" required>
 
-      <label for="location">Location:</label>
-      <input type="text" id="location" name="location" required>
+            <label for="waterAvailability">Water Availability :</label>
+            <input type="text" id="waterAvailability" name="waterAvailability" required>
 
-      <label for="irrigationMethod">Irrigation Method:</label>
-      <select id="irrigationMethod" name="irrigationMethod" required>
-        <option value="drip">Drip Irrigation</option>
-        <option value="sprinkler">Sprinkler Irrigation</option>
-        <option value="flood">Flood Irrigation</option>
-      </select>
+            <label for="annualIncome">Annual Income :</label>
+            <input type="text" id="annualIncome" name="annualIncome" required>
 
-      <button type="button" id="recommendBtn" onclick="recommendSchemes()">Recommend Schemes</button>
-    </form>
+            <label for="region">Region :</label>
+            <input type="text" id="region" name="region" required>
 
-    <div id="recommendations" style="display: none;">
-      <h2 style="font-weight: bolder;">Recommended Schemes:</h2>
-      <ul id="schemeList"></ul>
-    </div>
+            <label for="district">District :</label>
+            <input type="text" id="district" name="district" required>
+
+            <label for="farmSize">Farm Size:</label>
+            <input type="text" id="farmSize" name="farmSize" required>
+
+            <button type="button" id="recommendBtn" onclick="recommendSchemes()">Recommend Schemes</button>
+        </form>
+
+    <div id="recommendedSchemes"></div>
   </main>
 
   <footer>
         <p>&copy; 2023 FarmAssist. All rights reserved.</p>
     </footer>
 
-  <script >
-    function recommendSchemes() {
-  const farmSize = parseFloat(document.getElementById('farmSize').value);
-  const cropType = document.getElementById('cropType').value;
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // JavaScript function to recommend schemes
+        async function recommendSchemes() {
+            // Collect form data
+            const formData = {
+                cropType: document.getElementById('cropType').value,
+                cropName: document.getElementById('cropName').value,
+                waterAvailability: document.getElementById('waterAvailability').value,
+                annualIncome: document.getElementById('annualIncome').value,
+                region: document.getElementById('region').value,
+                district: document.getElementById('district').value,
+                farmSize: document.getElementById('farmSize').value,
+            };
 
-  let recommendedSchemes = [];
+            try {
+                // Make a POST request to the backend API
+                const response = await axios.post('http://localhost:5000/getschemes', formData);
 
-  if (farmSize > 10 && cropType.toLowerCase() === 'rice') {
-    recommendedSchemes.push('PM-KISAN Yojana', 'Smart Irrigation Grant');
-  } else if (farmSize <= 10 && cropType.toLowerCase() === 'corn') {
-    recommendedSchemes.push('Green Crop Initiative', 'Organic Farming Subsidy');
-  } else {
-    recommendedSchemes.push('PM-KISAN Yojana');
+                // Handle the response, update UI, etc.
+                console.log(response.data);
+                displayRecommendations(response.data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Modify the displayRecommendations function
+  function displayRecommendations(recommendedSchemesObj) {
+    console.log('Received recommendations:', recommendedSchemesObj);
+      const recommendationsDiv = document.getElementById('recommendedSchemes');
+      const recommendedSchemes = recommendedSchemesObj.recommendedSchemes;
+      // Clear previous content
+      recommendationsDiv.innerHTML = '';
+
+      
+
+     if (!Array.isArray(recommendedSchemes)) {
+            console.error('Invalid data format. Expected an array.', recommendedSchemesObj);
+            return;
+        }
+
+        if (recommendedSchemes.length === 0) {
+            recommendationsDiv.innerHTML = '<p>No recommendations available.</p>';
+        } else {
+            const listItems = recommendedSchemes.map(scheme => `<li>Scheme ID: ${scheme[0]}, Scheme Name: ${scheme[2]}, Score: ${scheme[1]}</li>`).join('');
+            recommendationsDiv.innerHTML = `<h2>Recommended Schemes:</h2><ul>${listItems}</ul>`;
+        }
   }
 
-  displayRecommendations(recommendedSchemes);
-}
 
-function displayRecommendations(schemes) {
-  const schemeList = document.getElementById('schemeList');
-  const recommendationsDiv = document.getElementById('recommendations');
 
-  schemeList.innerHTML = '';
-
-  schemes.forEach(scheme => {
-    const listItem = document.createElement('li');
-    listItem.textContent = scheme;
-    schemeList.appendChild(listItem);
-  });
-
-  recommendationsDiv.style.display = 'block';
-}
-
-  </script>
+    </script>
   
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

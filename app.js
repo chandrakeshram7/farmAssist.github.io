@@ -1,10 +1,12 @@
 //Controller Logic MVC Architeture
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const path = require('path');
 const hbs = require('hbs');
 const session = require('express-session');
 const port = process.env.PORT || 3000
+app.use(cors());
 const bodyParser = require('body-parser');
 require('./src/db/conn');
 const Register= require('./src/models/registration')
@@ -292,9 +294,55 @@ app.post('/login', passport.authenticate('local', {
       res.status(500).send('Internal Server Error');
     }
   });
-  
-  
- 
+  //==============================================================
+  app.post('/getschemes', async (req, res) => {
+    const farmerProfile = req.body;
+
+    try {
+        const response = await axios.post('http://localhost:5000/getschemes', farmerProfile, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+        });
+
+        if (!response.data || !Array.isArray(response.data.recommendedSchemes)) {
+            throw new Error('Invalid response format');
+        }
+
+        res.json(response.data);
+    } catch (error) {
+        console.error('Error:', error);
+
+        if (!error.response) {
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+
+        if (error.response.status === 404) {
+            res.status(404).json({ error: 'Not Found' });
+            return;
+        }
+
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //===============================================================
   app.post('/updateProfile', upload.single('image'), async (req, res) => {
     try {
        // Check if the user is logged in
