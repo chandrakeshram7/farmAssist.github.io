@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended:false}));
 const view_path = path.join(__dirname,'./views');
 const partial_path = path.join(__dirname,'./partials');
+
 hbs.registerPartials(partial_path);
 app.use(express.static(view_path));
 app.set("view engine","hbs")
@@ -439,7 +440,7 @@ app.get('/aboutus',isAuthenticated,(req, res)=>{
 app.get('/contactus',isAuthenticated,(req, res)=>{
     res.render("contactus",{ user: req.user })
 });
-app.get('/news',isAuthenticated,cors(),(req, res)=>{
+app.get('/news',isAuthenticated,(req, res)=>{
     res.render("news",{ user: req.user })
 });
 app.get('/registration',(req, res)=>{
