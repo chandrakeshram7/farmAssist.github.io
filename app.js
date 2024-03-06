@@ -38,7 +38,7 @@ app.use(passport.session());
 app.use(flash());
 
 const corsOptions = {
-    origin: 'https://ml-model1-three.vercel.app/', // Replace with your Vercel domain
+    origin: ['https://ml-model1-three.vercel.app/','https://farm-assist-github-io.vercel.app/'], // Replace with your Vercel domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Enable credentials (if needed)
     optionsSuccessStatus: 204, // Set the preflight response status to 204
