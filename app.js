@@ -430,6 +430,16 @@ app.post('/logout', (req, res) => {
    
 });
 
+
+app.post('/news', (req, res) => {
+    const receivedData = req.body;
+
+    // Add your logic to process the received news data
+    console.log('Received News Data:', receivedData);
+
+    // Send a response
+    res.json({ message: 'News data received successfully!' });
+});
 app.get('/',(req, res)=>{
     
     res.render("index",{ user: req.user })
