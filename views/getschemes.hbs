@@ -238,7 +238,10 @@ h5{
 
             try {
                 // Make a POST request to the backend API
-                const response = await axios.post('https://ml-model1-three.vercel.app/getschemes', formData);
+                 const timestamp = new Date().getTime();
+        
+        // Make a POST request to the backend API with the timestamp
+                const response = await axios.post(`https://ml-model1-three.vercel.app/getschemes?timestamp=${timestamp}`, formData);
 
                 // Handle the response, update UI, etc.
                 console.log(response.data);

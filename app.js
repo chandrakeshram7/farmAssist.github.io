@@ -38,7 +38,7 @@ app.use(passport.session());
 app.use(flash());
 
 const corsOptions = {
-    origin: ['https://ml-model1-three.vercel.app/','https://farm-assist-github-io.vercel.app/'], // Replace with your Vercel domain
+    origin: ['https://ml-model1-three.vercel.app/','https://farm-assist-github-io.vercel.app/','https://ml-model1-three.vercel.app/news'], // Replace with your Vercel domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Enable credentials (if needed)
     optionsSuccessStatus: 204, // Set the preflight response status to 204
@@ -431,8 +431,8 @@ app.post('/logout', (req, res) => {
 });
 
 
-app.post('/news', (req, res) => {
-    const receivedData = req.body;
+app.get('/news', (req, res) => {
+    const receivedData = req.query;  // Use req.query for GET requests
 
     // Add your logic to process the received news data
     console.log('Received News Data:', receivedData);
@@ -440,6 +440,7 @@ app.post('/news', (req, res) => {
     // Send a response
     res.json({ message: 'News data received successfully!' });
 });
+
 app.get('/',(req, res)=>{
     
     res.render("index",{ user: req.user })
