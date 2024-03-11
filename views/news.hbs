@@ -19,26 +19,116 @@ h5{
      padding-left: 1rem;
      padding-top: 0.5rem;
 }
+.main-title {
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.sub-title {
+    color: #555;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.news-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.news-card:hover {
+    transform: scale(1.05);
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-image {
+    max-width: 100%;
+    height: 270px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    color: #666;
+    flex-grow: 1;
+}
+
+.card-author,
+.card-source,
+.card-published {
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.read-more {
+    background-color: #4CAF50;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius:8px;
+    align-items: center;
+    margin-top: auto; /* Push the button to the bottom */
+}
+
+.read-more a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
     </style>
 </head>
 <body>
      {{>navbar}}
     
     <h1 style="color: #28a745; font-size: 3rem; font-weight: bolder; margin-top: 9rem; text-align: center;">Top News India</h1>
-    <ul>
+    <div class="news-container">
         {{#each newsData}}
-            <li>
-                <h3>{{ title }}</h3>
-                <p>{{ description }}</p>
-                <p>{{ content }}</p>
-                <p><strong>Author:</strong> {{ author }}</p>
-                <p><strong>Source:</strong> {{ source.name }}</p>
-                <p><strong>Published At:</strong> {{ publishedAt }}</p>
-                <p><strong>URL:</strong> <a href="{{ url }}" target="_blank">{{ url }}</a></p>
-                <!-- Add more fields as needed -->
-            </li>
+            <div class="news-card">
+                <div class="news-image">
+                    {{#if urlToImage}}
+                        <img src="{{ urlToImage }}" alt="{{ title }}" class="card-image">
+                    {{else}}
+                        <img src="/logo.jpg" alt="{{ title }}" class="card-image">
+                    {{/if}}
+                </div>
+                <div class="news-content">
+                    <h3 class="card-title">{{ title }}</h3>
+                    <p class="card-author"><strong>Author:</strong> {{ author }}</p>
+                    <p class="card-source"><strong>Source:</strong> {{ source.name }}</p>
+                    <p class="card-published"><strong>Published At:</strong> {{ publishedAt }}</p>
+                    
+                </div>
+                 <div class="read-more">
+                    <a href="{{ url }}" target="_blank">Read More</a>
+                </div>
+            </div>
         {{/each}}
-    </ul>
+    </div>
     <footer>
         <p>&copy; 2023 FarmAssist. All rights reserved.</p>
     </footer>
