@@ -457,7 +457,7 @@ app.get('/news',isAuthenticated ,async (req, res) => {
         });
         
         const newsData = response.data.articles;
-        res.render('index', { user:req.user, newsData });
+        res.render('news', { user:req.user, newsData });
     } catch (error) {
         console.error('Error:', error.message);
     }
