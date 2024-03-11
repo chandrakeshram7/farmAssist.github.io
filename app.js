@@ -431,15 +431,6 @@ app.post('/logout', (req, res) => {
 });
 
 
-app.get('/news', (req, res) => {
-    const receivedData = req.query;  // Use req.query for GET requests
-
-    // Add your logic to process the received news data
-    console.log('Received News Data:', receivedData);
-
-    // Send a response
-    res.json({ message: 'News data received successfully!' });
-});
 
 app.get('/',(req, res)=>{
     
@@ -451,8 +442,26 @@ app.get('/aboutus',isAuthenticated,(req, res)=>{
 app.get('/contactus',isAuthenticated,(req, res)=>{
     res.render("contactus",{ user: req.user })
 });
-app.get('/news',isAuthenticated,(req, res)=>{
-    res.render("news",{ user: req.user })
+app.get('/news',isAuthenticated ,async (req, res) => {
+    const axios = require('axios');
+
+    const apiKey = 'ddf13f29e2a7416eb9ee9e1a682e2de3';
+    const apiUrl = 'https://newsapi.org/v2/top-headlines';
+    
+    try {
+        const response = await axios.get(apiUrl, {
+            params: {
+                apiKey: apiKey,
+                country: 'in', // Set the country code for India
+            },
+        });
+        
+        const newsData = response.data.articles;
+        res.render('index', { user:req.user, newsData });
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+    
 });
 app.get('/registration',(req, res)=>{
     res.render("registration",{ user: req.user })
