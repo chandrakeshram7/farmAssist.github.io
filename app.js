@@ -38,7 +38,7 @@ app.use(passport.session());
 app.use(flash());
 
 const corsOptions = {
-    origin: ['https://ml-model1-three.vercel.app/','https://farm-assist-github-io.vercel.app/','https://ml-model1-three.vercel.app/news'], // Replace with your Vercel domain
+    origin: ['https://ml-model1-three.vercel.app/','https://farm-assist-github-io.vercel.app/','https://ml-model1-three.vercel.app/news','https://crop-predict-fxeb.onrender.com/'], // Replace with your Vercel domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Enable credentials (if needed)
     optionsSuccessStatus: 204, // Set the preflight response status to 204
@@ -340,6 +340,47 @@ app.post('/login', passport.authenticate('local', {
 });
 
 
+app.post('/croprecommend', async (req, res) => {
+    const cropProfile = req.body;
+
+    try {
+        const response = await axios.post('http://localhost:5000/croprecommend', cropProfile, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+        });
+
+
+        res.json(response.data);
+    } catch (error) {
+        console.error('Error:', error);
+
+        if (!error.response) {
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+
+        if (error.response.status === 404) {
+            res.status(404).json({ error: 'Not Found' });
+            return;
+        }
+
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -480,6 +521,9 @@ app.get('/login' ,(req,res)=>{
 })
 app.get('/getschemes',isAuthenticated,(req,res)=>{
     res.render('getschemes',{ user: req.user })
+})
+app.get('/croprecommend', isAuthenticated ,(req , res)=>{
+    res.render('croprecommend',{user : req.user} )
 })
 app.get('/forgot',(req, res)=>{
     res.render('forgot');
