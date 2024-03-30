@@ -16,11 +16,12 @@
 
 
 .top{
-    margin-top: -3rem;
+    
     background-color: #4CAF50;
   color: #fff;
   text-align: center;
   padding: 20px 0;
+  margin-top: -3rem;
 }
 .top h1 {
   font-size: 2.5rem;
@@ -182,7 +183,7 @@ table {
      {{>navbar}}
     <br><br>
   <div class="top">
-    <h1>Get Your Personalized Crops here</h1>
+    <h3>Get Your Personalized Crops here</h3>
     <p>Explore the crops that suit your farm.</p>
   </div>
   <main>
@@ -219,24 +220,11 @@ table {
           <tr >
             <td colspan="2" style="text-align:center;"><button type="button" id="recommendBtn" onclick="recommendCrops()">Recommend Crop</button></td>
           </tr>
-          <tr>
-            <td colspan="2" style="display: hidden;margin-top:2rem;text-align:center;font-size:1.2rem;font-weight:bolder;" id="displayRec"></td>
+          <tr >
+            <td  rowspan="2" colspan="2" style="display: hidden;margin-top:2rem;text-align:center;font-size:1.2rem;font-weight:bolder;" id="displayRec"></td>
           </tr>
         </table>
-            {{!-- <label for="cropType">Enter the value of Nitrogen </label>
-            <input type="number" id="nitrogen" name="nitrogen" required>
-            <label for="cropType">Enter the value of Phosphorus </label>
-            <input type="number" id="phosphorus" name="phosphorus" required>
-            <label for="cropType">Enter the value of Potassium </label>
-            <input type="number" id="potassium" name="potassium" required>
-            <label for="cropType">Enter the value of Ph Value </label>
-            <input type="number" id="phvalue" name="phvalue" required>
-            <label for="cropType">Enter the value of Rainfall in (mm) </label>
-            <input type="number" id="rainfall" name="rainfall" required>
-            <label for="cropType">Enter the value of Temperature </label>
-            <input type="number" id="temperature" name="temperature" required>
-            <label for="cropType">Enter the value of Humidity </label>
-            <input type="number" id="humidity" name="humidity" required> --}}
+           
 
             
         </form>
@@ -298,7 +286,7 @@ table {
             recommendationsDiv.innerHTML = '<p>No recommendations available.</p>';
         } else {
             
-            recommendationsDiv.innerHTML = `Recommended Crop is ${recomScheme}`;
+            recommendationsDiv.innerHTML = `Recommended Crop is <span style="color:coral">${recomScheme}<span>`;
             recommendationsDiv.style.visibility="visible";
 
         }
