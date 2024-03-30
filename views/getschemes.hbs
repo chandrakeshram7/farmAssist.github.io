@@ -7,7 +7,7 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <style>
-        body {
+       body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
@@ -16,11 +16,12 @@
 
 
 .top{
-    margin-top: -3rem;
+    
     background-color: #4CAF50;
   color: #fff;
   text-align: center;
   padding: 20px 0;
+  margin-top: -3rem;
 }
 .top h1 {
   font-size: 2.5rem;
@@ -32,36 +33,29 @@
 }
 
 main {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  margin: auto;
   padding: 20px;
 }
 
 form {
-  background-color: #fff;
+  background-color: rgb(181, 244, 187);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 400px;
-  text-align: center;
+  width: 700px;
   animation: fadeInUp 1s ease-out;
+  
 }
 
 form label {
-  display: block;
+  
   margin-bottom: 10px;
   color: #333;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  
 }
 
-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
+
 
 button {
   background-color: #4CAF50;
@@ -165,8 +159,14 @@ h5{
      padding-left: 1rem;
      padding-top: 0.5rem;
 }
-
-
+table {
+    caption-side: bottom;
+    border-spacing: 7px;
+    width: 558px;
+}
+h6{
+  font-size: 1.2rem;
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -178,20 +178,126 @@ h5{
     transform: translateY(0);
   }
 }
-
     </style>
 </head>
 <body>
      {{>navbar}}
     <br><br>
   <div class="top">
-    <h1>Get Your Personalized Schemes here</h1>
+    <h3>Get Your Personalized Schemes here</h3>
     <p>Explore the latest agricultural schemes for your farm.</p>
   </div>
   <main>
-    <form id="userForm">
-            <label for="cropType">Crop Type:</label>
+    <form id="userForm" style="margin: auto;">
+          <table style="margin: auto;">
+          <tr>
+            <td><label for="farmSize">Enter your farm size (In Hectares)<span style="color: red;">*</span></label></td>
+            <td> <input type="text" id="farmSize"  class="tdd" name="farmSize" required placeholder="For eg. 4.34, If not, NA"></td>
+          </tr>
+          <tr>
+            <td><label for="cropName">Select the crop you grow<span style="color: red;">*</span> </label></td>
+            <td> <select id="cropName" name="cropName"  style="color: #333;" >
+            <option value="" disabled selected>Select a crop </option>
+            <option value="Bajra">Bajra</option>
+<option value="Banana">Banana</option>
+<option value="Cashew">Cashew</option>
+<option value="Cotton">Cotton</option>
+<option value="Gram">Gram</option>
+<option value="Grapes">Grapes</option>
+<option value="Groundnut">Groundnut</option>
+<option value="Guava">Guava</option>
+<option value="Jackfruit">Jackfruit</option>
+<option value="Maize">Maize</option>
+<option value="Mango">Mango</option>
+<option value="Moong">Moong</option>
+<option value="Mustard">Mustard</option>
+<option value="Oilpalm">Oilpalm</option>
+<option value="Onion">Onion</option>
+<option value="Orange">Orange</option>
+<option value="Paddy">Paddy</option>
+<option value="Pomegranate">Pomegranate</option>
+<option value="Rice">Rice</option>
+<option value="Sesame">Sesame</option>
+<option value="Soybean">Soybean</option>
+<option value="Sugarcane">Sugarcane</option>
+<option value="Sunflower">Sunflower</option>
+<option value="Tur">Tur</option>
+<option value="Urad">Urad</option>
+<option value="Wheat">Wheat</option>
+
+        </select></td>
+          </tr>
+          <tr>
+            <td><label for="waterAvailability">Is what Available to you ?<span style="color: red;">*</span></label></td>
+            <td> <select id="waterAvailability" name="waterAvailability"  style="color: #333;" >
+            <option value="" disabled selected>Select Water Availability </option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select></td>
+          </tr>
+          <tr>
+            <td><label for="annualIncome">Enter your Annual Income (In Rs)<span style="color: red;">*</span></label></td>
+            <td> <input type="text" id="annualIncome"  class="tdd" name="annualIncome" required placeholder="For eg. 300000 If not, NA"></td>
+          </tr>
+          <tr>
+            <td><label for="district">Select the District <strong>(For Maharashtra):</strong> <span style="color: red; font-weight:bolder">*</span></label></td>
+        <td><select id="district" name="district"  style="color: #333;" >
+            <option value="" disabled selected>Select a district</option>
+            <option value="Ahmednagar">Ahmednagar</option>
+            <option value="Akola">Akola</option>
+            <option value="Amravati">Amravati</option>
+            <option value="Aurangabad">Aurangabad</option>
+            <option value="Beed">Beed</option>
+            <option value="Bhandara">Bhandara</option>
+            <option value="Buldhana">Buldhana</option>
+            <option value="Chandrapur">Chandrapur</option>
+            <option value="Dhule">Dhule</option>
+            <option value="Gadchiroli">Gadchiroli</option>
+            <option value="Gondia">Gondia</option>
+            <option value="Hingoli">Hingoli</option>
+            <option value="Jalgaon">Jalgaon</option>
+            <option value="Jalna">Jalna</option>
+            <option value="Kolhapur">Kolhapur</option>
+            <option value="Latur">Latur</option>
+            <option value="Mumbai City">Mumbai City</option>
+            <option value="Mumbai Suburban">Mumbai Suburban</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Nanded">Nanded</option>
+            <option value="Nandurbar">Nandurbar</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Osmanabad">Osmanabad</option>
+            <option value="Palghar">Palghar</option>
+            <option value="Parbhani">Parbhani</option>
+            <option value="Pune">Pune</option>
+            <option value="Raigad">Raigad</option>
+            <option value="Ratnagiri">Ratnagiri</option>
+            <option value="Sangli">Sangli</option>
+            <option value="Satara">Satara</option>
+            <option value="Sindhudurg">Sindhudurg</option>
+            <option value="Solapur">Solapur</option>
+            <option value="Thane">Thane</option>
+            <option value="Wardha">Wardha</option>
+            <option value="Washim">Washim</option>
+            <option value="Yavatmal">Yavatmal</option>
+        </select>
+        </td>
+          </tr>
+          <tr >
+            <td colspan="2" style="text-align:center;"><button type="button" id="recommendBtn" onclick="recommendSchemes()">Recommend Schemes</button></td>
+          </tr>
+          <tr >
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+
+
+
+            {{!-- <label for="cropType">Crop Type:</label>
             <input type="text" id="cropType" name="cropType" required>
+
+            <label for="farmSize">Farm Size (Hectares):</label>
+            <input type="text" id="farmSize" name="farmSize" required>
 
             <label for="cropName">Crop Name:</label>
             <input type="text" id="cropName" name="cropName" required>
@@ -202,19 +308,13 @@ h5{
             <label for="annualIncome">Annual Income :</label>
             <input type="text" id="annualIncome" name="annualIncome" required>
 
-            <label for="region">Region :</label>
-            <input type="text" id="region" name="region" required>
-
             <label for="district">District :</label>
             <input type="text" id="district" name="district" required>
 
-            <label for="farmSize">Farm Size:</label>
-            <input type="text" id="farmSize" name="farmSize" required>
-
-            <button type="button" id="recommendBtn" onclick="recommendSchemes()">Recommend Schemes</button>
+            <button type="button" id="recommendBtn" onclick="recommendSchemes()">Recommend Schemes</button> --}}
         </form>
 
-    <div id="recommendedSchemes"></div>
+    <div id="recommendedSchemes" style="width: 700px; background-color:#a3f0a7;margin:auto; border-radius:10px;height:fit-content;margin-top:2rem;text-align:center;align-items:center"></div>
   </main>
 
   <footer>
@@ -226,14 +326,26 @@ h5{
         // JavaScript function to recommend schemes
         async function recommendSchemes() {
             // Collect form data
+            const selectCrop= document.getElementById('cropName');
+            const selectedIndexCrop = selectCrop.selectedIndex;
+            const selectValueCrop = selectCrop.options[selectedIndexCrop].value;
+
+            const selectwaterAvail= document.getElementById('waterAvailability');
+            const selectedIndexWater = selectwaterAvail.selectedIndex;
+            const selectValueWater = selectwaterAvail.options[selectedIndexWater].value;
+
+            const selectDistrict= document.getElementById('district');
+            const selectedIndexDistrict = selectDistrict.selectedIndex;
+            const selectValueDistrict = selectDistrict.options[selectedIndexDistrict].value;
+            
+            
             const formData = {
-                cropType: document.getElementById('cropType').value,
-                cropName: document.getElementById('cropName').value,
-                waterAvailability: document.getElementById('waterAvailability').value,
-                annualIncome: document.getElementById('annualIncome').value,
-                region: document.getElementById('region').value,
-                district: document.getElementById('district').value,
-                farmSize: document.getElementById('farmSize').value,
+                Farm_Size: document.getElementById('farmSize').value,
+                Crop_Names: selectValueCrop,
+                Water_Availability: selectValueWater,
+                Annual_Income_of_Farmer: document.getElementById('annualIncome').value,
+                District: selectValueDistrict,
+                
             };
 
             try {
@@ -267,10 +379,10 @@ h5{
         }
 
         if (recommendedSchemes.length === 0) {
-            recommendationsDiv.innerHTML = '<p>No recommendations available.</p>';
+            recommendationsDiv.innerHTML = '<br><h3 style="font-weight:bolder; margin:1rem 1rem;">No recommendations available.</h3><br>';
         } else {
-            const listItems = recommendedSchemes.map(scheme => `<li>Scheme ID: ${scheme[0]}, Scheme Name: ${scheme[2]}, Score: ${scheme[1]}</li>`).join('');
-            recommendationsDiv.innerHTML = `<h2>Recommended Schemes:</h2><ul>${listItems}</ul>`;
+            const listItems = recommendedSchemes.map(scheme => `<li><h6 style="font-size:1.2rem;"> ${scheme[2]}<br><br><a href="${scheme[3]}" style="background-color:green;color:white;text-decoration:none; padding:5px 5px;margin:1rem 1rem;border-radius:8px">Click Here</a></h6></li> `).join('');
+            recommendationsDiv.innerHTML = `<br><h2 style="color:black;margin:1rem 1rem;font-size:2rem">Recommended Schemes</h2><ul>${listItems}</ul><br>`;
         }
   }
 
