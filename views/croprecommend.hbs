@@ -32,36 +32,29 @@
 }
 
 main {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  margin: auto;
   padding: 20px;
 }
 
 form {
-  background-color: #fff;
+  background-color: rgb(181, 244, 187);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 400px;
-  text-align: center;
+  width: 700px;
   animation: fadeInUp 1s ease-out;
+  
 }
 
 form label {
-  display: block;
+  
   margin-bottom: 10px;
   color: #333;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  
 }
 
-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
+
 
 button {
   background-color: #4CAF50;
@@ -165,7 +158,11 @@ h5{
      padding-left: 1rem;
      padding-top: 0.5rem;
 }
-
+table {
+    caption-side: bottom;
+    border-spacing: 7px;
+    width: 558px;
+}
 
 @keyframes fadeInUp {
   from {
@@ -189,8 +186,44 @@ h5{
     <p>Explore the crops that suit your farm.</p>
   </div>
   <main>
-    <form id="userForm">
-            <label for="cropType">Enter the value of Nitrogen </label>
+    <form id="userForm" style="margin: auto;" cellpadding="10px" cellspacing="20px">
+        <table style="margin: auto;">
+          <tr>
+            <td><label for="cropType">Enter the value of Nitrogen (%)<span style="color: red;">*</span></label></td>
+            <td> <input type="number" id="nitrogen"  class="tdd" name="nitrogen" required placeholder="For eg. 45"></td>
+          </tr>
+          <tr>
+            <td><label for="cropType">Enter the value of Phosphorus (%)<span style="color: red;">*</span> </label></td>
+            <td> <input type="number" id="phosphorus" name="phosphorus" required placeholder="For eg. 45"></td>
+          </tr>
+          <tr>
+            <td><label for="cropType">Enter the value of Potassium (%)<span style="color: red;">*</span></label></td>
+            <td><input type="number" id="potassium" name="potassium" required placeholder="For eg. 45"></td>
+          </tr>
+          <tr>
+            <td><label for="cropType">Enter the value of Ph Value <span style="color: red;">*</span> </label></td>
+            <td><input type="number" id="phvalue" name="phvalue" required placeholder="Ph value range 1-14"></td>
+          </tr>
+          <tr>
+            <td><label for="cropType">Enter the value of Rainfall in (mm) <span style="color: red;">*</span></label></td>
+            <td><input type="number" id="rainfall" name="rainfall" required placeholder="For eg. 115.323"></td>
+          </tr>
+          <tr>
+            <td><label for="cropType">Enter the value of Temperature ( &deg;C )<span style="color: red;">*</span></label></td>
+            <td><input type="number" id="temperature" name="temperature" required placeholder="For eg. 42"></td>
+          </tr>
+          <tr>
+            <td><label for="cropType">Enter the value of Humidity <span style="color: red;">*</span></label></td>
+            <td><input type="number" id="humidity" name="humidity" required placeholder="For eg. 35"></td>
+          </tr>
+          <tr >
+            <td colspan="2" style="text-align:center;"><button type="button" id="recommendBtn" onclick="recommendCrops()">Recommend Crop</button></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="display: hidden;margin-top:2rem;text-align:center;font-size:1.2rem;font-weight:bolder;" id="displayRec"></td>
+          </tr>
+        </table>
+            {{!-- <label for="cropType">Enter the value of Nitrogen </label>
             <input type="number" id="nitrogen" name="nitrogen" required>
             <label for="cropType">Enter the value of Phosphorus </label>
             <input type="number" id="phosphorus" name="phosphorus" required>
@@ -203,13 +236,14 @@ h5{
             <label for="cropType">Enter the value of Temperature </label>
             <input type="number" id="temperature" name="temperature" required>
             <label for="cropType">Enter the value of Humidity </label>
-            <input type="number" id="humidity" name="humidity" required>
+            <input type="number" id="humidity" name="humidity" required> --}}
 
-            <button type="button" id="recommendBtn" onclick="recommendCrops()">Recommend Crop</button>
+            
         </form>
 
-    <div id="recommendedCrops"></div>
+    
   </main>
+  <div id="recommendedCrops"></div>
 
   <footer>
         <p>&copy; 2023 FarmAssist. All rights reserved.</p>
@@ -248,8 +282,11 @@ h5{
         // Modify the displayRecommendations function
   function displayRecommendations(recommendedSchemesObj) {
     console.log('Received recommendations:', recommendedSchemesObj);
-      const recommendationsDiv = document.getElementById('recommendedCrops');
-      const recomScheme = recommendedSchemesObj.prediction;
+      const recommendationsDiv = document.getElementById('displayRec');
+      let recomScheme = recommendedSchemesObj.prediction;
+      recomScheme = recomScheme.toUpperCase();
+      console.log(recomScheme)
+      
       // Clear previous content
       recommendationsDiv.innerHTML = '';
 
@@ -257,11 +294,13 @@ h5{
 
      
 
-        if (recommendedSchemesObj.length === 0) {
+        if (recomScheme.length === 0) {
             recommendationsDiv.innerHTML = '<p>No recommendations available.</p>';
         } else {
             
-            recommendationsDiv.innerHTML = `<h2>Recommended Crop is : ${recomScheme}</h2>`;
+            recommendationsDiv.innerHTML = `Recommended Crop is ${recomScheme}`;
+            recommendationsDiv.style.visibility="visible";
+
         }
   }
 
