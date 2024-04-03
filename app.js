@@ -507,8 +507,8 @@ app.get('/news',isAuthenticated ,async (req, res) => {
 app.get('/registration',(req, res)=>{
     res.render("registration",{ user: req.user })
 });
-app.get('/schemes',isAuthenticated, (req,res)=>{
-    res.render('schemes',{ user: req.user })
+app.get('/weather',isAuthenticated, (req,res)=>{
+    res.render('weather',{ user: req.user })
 })
 app.get('/thanks', (req,res)=>{
     res.render('thanks')
