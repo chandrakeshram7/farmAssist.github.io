@@ -231,7 +231,14 @@ table {
 
     
   </main>
-  <div id="recommendedCrops"></div>
+  <div id="recommendedCrops"></div><br>
+  <h1 style="font-weight: bolder;font-size:2.5rem;color:#28a745;text-align:center;margin:auto">Check MSP of your Crop</h1>
+    <form id="cropForm" style="margin: auto; text-align:center;justify-content:center;margin-bottom:1rem;">
+        <label for="cropName">Enter Crop Name:</label>
+        <input type="text" id="cropName" name="cropName" required style="width: 80%;">
+        <button type="submit">Get MSP</button>
+    </form>
+    <div id="mspResult" style="margin: auto; height:200px; width:700px;border-radius:10px;background-color:#afe5b1;visibility:hidden; align-items:center;justify-content:center;text-align:center;padding:2rem 2rem;font-size:1.2rem;"></div>
 
   <footer>
         <p>&copy; 2023 FarmAssist. All rights reserved.</p>
@@ -291,6 +298,155 @@ table {
 
         }
   }
+
+
+
+
+
+ document.getElementById("cropForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    let cropName = document.getElementById("cropName").value;
+    
+    // Make a POST request to your ML API
+    axios.post('https://crop-predict-fxeb.onrender.com/msp', {
+        crop_name: cropName
+    })
+    .then(response => {
+        let mspResult = document.getElementById("mspResult");
+        mspResult.innerHTML = ""; // Clear previous results
+        mspResult.style.visibility ="visible";
+        // Check if response data is an object
+        if (typeof response.data === 'object' && response.data !== null) {
+            // Create a table element
+            let table = document.createElement("table");
+            
+            // Create table header
+            let headerRow = table.insertRow();
+            let headerCellVariety = headerRow.insertCell();
+            headerCellVariety.textContent = "Variety";
+            headerCellVariety.style.backgroundColor="#28a745";
+            headerCellVariety.style.color="white";
+            let headerCell2021_22 = headerRow.insertCell();
+            headerCell2021_22.textContent = "2021-22 (Rs)";
+            headerCell2021_22.style.backgroundColor="#28a745"
+            headerCell2021_22.style.color="white"
+            let headerCell2022_23 = headerRow.insertCell();
+            headerCell2022_23.textContent = "2022-23 (Rs)";
+            headerCell2022_23.style.backgroundColor="#28a745";
+            headerCell2022_23.style.color="white";
+            let headerCell2023_24 = headerRow.insertCell();
+            headerCell2023_24.textContent = "2023-24 (Rs)";
+            headerCell2023_24.style.backgroundColor="#28a745";
+            headerCell2023_24.style.color="white";
+            
+            // Check if there is only one variety
+            if (Array.isArray(response.data.varieties)) {
+                // If there's only one variety, convert it to an array for consistency
+                
+                
+                // Iterate over varieties and MSP values and populate the table
+                for (let i = 0; i < response.data.varieties.length; i++) {
+                    let row = table.insertRow();
+                    let cellVariety = row.insertCell();
+                    cellVariety.textContent = response.data.varieties[i];
+                    let cell2021_22 = row.insertCell();
+                    cell2021_22.textContent = response.data.msp_2021_22[i];
+                    let cell2022_23 = row.insertCell();
+                    cell2022_23.textContent = response.data.msp_2022_23[i];
+                    let cell2023_24 = row.insertCell();
+                    cell2023_24.textContent = response.data.msp_2023_24[i];
+                }
+            }
+            
+            // Append the table to the result element
+            table.style.alignItems ="center";
+            table.style.textAlign ="center";
+            table.cellPadding ="10px";
+            table.border= "2px solid";
+            table.cellSpacing ="10px";
+            table.align="center";
+            table.alignItems="center"
+            mspResult.appendChild(table);
+        } else {
+            mspResult.style.visibility ="visible"
+            // If response data is not an object, display it as is
+             let formattedResponse = response.data.replace(/\"/g, ""); // Remove quotation marks
+            formattedResponse = formattedResponse.replace(/\{|\}/g, ""); // Remove curly braces
+            formattedResponse = formattedResponse.replace(/:/g, ": "); // Add space after colon
+            formattedResponse = formattedResponse.replace(/\:/g,"");
+            formattedResponse = formattedResponse.replace(/\[|\]/g,"");
+            formattedResponse = formattedResponse.replace(/\,/g,"\t");
+            formattedResponse = formattedResponse.replace(/\_/g," ");
+            formattedResponse = formattedResponse.toUpperCase();
+            // Display the formatted response
+            let msp_21="";
+            for(let i =12;i<=16;i++){
+              msp_21 += formattedResponse[i];
+            }
+            let msp_22 ="";
+            for(let i = 29;i<=33;i++){
+              msp_22 += formattedResponse[i];
+            }
+            let msp_23 ="";
+            for(let i = 46;i<=49;i++){
+              msp_23 += formattedResponse[i];
+            }
+            let vari = "";
+            for(let i=61;i<formattedResponse.length;i++){
+              vari += formattedResponse[i];
+            }
+            console.log(vari)
+            console.log(msp_23)
+            console.log(msp_22)
+            console.log(msp_21);
+            let table = document.createElement("table");
+            
+            // Create table header
+            let headerRow = table.insertRow();
+            let headerCellVariety = headerRow.insertCell();
+            headerCellVariety.textContent = "Variety";
+            headerCellVariety.style.backgroundColor="#28a745";
+            headerCellVariety.style.color="white";
+            let headerCell2021_22 = headerRow.insertCell();
+            headerCell2021_22.textContent = "2021-22 (Rs)";
+            headerCell2021_22.style.backgroundColor="#28a745"
+            headerCell2021_22.style.color="white"
+            let headerCell2022_23 = headerRow.insertCell();
+            headerCell2022_23.textContent = "2022-23 (Rs)";
+            headerCell2022_23.style.backgroundColor="#28a745";
+            headerCell2022_23.style.color="white";
+            let headerCell2023_24 = headerRow.insertCell();
+            headerCell2023_24.textContent = "2023-24 (Rs)";
+            headerCell2023_24.style.backgroundColor="#28a745";
+            headerCell2023_24.style.color="white";
+            
+            let row = table.insertRow();
+            let cell1 = row.insertCell();
+            cell1.textContent = vari;
+            let cell2 = row.insertCell();
+            cell2.textContent = msp_21;
+            let cell3 = row.insertCell();
+            cell3.textContent = msp_22;
+            let cell4 = row.insertCell();
+            cell4.textContent = msp_23;
+
+             table.style.alignItems ="center";
+            table.style.textAlign ="center";
+            table.cellPadding ="10px";
+            table.border= "solid 3px";
+            table.cellSpacing ="10px";
+            table.align="center";
+            table.alignItems="center"
+            mspResult.appendChild(table);
+        }
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        mspResult.style.visibility = "visible"
+        document.getElementById("mspResult").textContent = "MSP Data for the Required Crop Not Available";
+    });
+});
 
 
 
