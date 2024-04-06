@@ -234,8 +234,24 @@ table {
   <div id="recommendedCrops"></div><br>
   <h1 style="font-weight: bolder;font-size:2.5rem;color:#28a745;text-align:center;margin:auto">Check MSP of your Crop</h1>
     <form id="cropForm" style="margin: auto; text-align:center;justify-content:center;margin-bottom:1rem;">
-        <label for="cropName">Enter Crop Name:</label>
-        <input type="text" id="cropName" name="cropName" required style="width: 80%;">
+        <label for="cropName">Select the Crop Name:</label>
+        <select id="cropName" name="cropName"  style="color: #333;" >
+            <option value="" disabled selected>Select the Crop </option>
+            <option value="Paddy">Paddy</option>
+  <option value="Jowar">Jowar</option>
+  <option value="Bajra">Bajra</option>
+  <option value="Ragi">Ragi</option>
+  <option value="Maize">Maize</option>
+  <option value="Tur (Arhar)">Tur (Arhar)</option>
+  <option value="Moong">Moong</option>
+  <option value="Urad">Urad</option>
+  <option value="Cotton">Cotton</option>
+  <option value="Groundnut">Groundnut</option>
+  <option value="Sunflower Seed">Sunflower Seed</option>
+  <option value="Soyabean">Soyabean</option>
+  <option value="Sesamum">Sesamum</option>
+  <option value="Nigerseed">Nigerseed</option>
+        </select>
         <button type="submit">Get MSP</button>
     </form>
     <div id="mspResult" style="margin: auto; height:200px; width:700px;border-radius:10px;background-color:#afe5b1;visibility:hidden; align-items:center;justify-content:center;text-align:center;padding:2rem 2rem;font-size:1.2rem;"></div>
@@ -306,11 +322,13 @@ table {
  document.getElementById("cropForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent default form submission
     
-    let cropName = document.getElementById("cropName").value;
+    let cropName = document.getElementById("cropName");
+    let selectedIndexCrop = cropName.selectedIndex;
+    let selectValueCrop = cropName.options[selectedIndexCrop].value;
     
     // Make a POST request to your ML API
     axios.post('https://crop-predict-fxeb.onrender.com/msp', {
-        crop_name: cropName
+        crop_name: selectValueCrop
     })
     .then(response => {
         let mspResult = document.getElementById("mspResult");
