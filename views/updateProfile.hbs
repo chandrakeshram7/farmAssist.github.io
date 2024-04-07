@@ -143,23 +143,23 @@ input[type="password"]:focus {
 <form  action="/updateProfile" method="post" enctype="multipart/form-data">
 <fieldset>
 <legend> Enter the Details to Update</legend>
-<label for="">Enter Your Name <span style="color: red; font-weight:bolder">*</span></label>
-<input type="text" name="name" title="Please enter at least 3 characters, using only letters " style="margin-bottom: 10px;" required id="userName" pattern="[a-zA-Z ]{3,}">
+<label for="">Enter Your Name </label>
+<input type="text" name="name" title="Please enter at least 3 characters, using only letters " style="margin-bottom: 10px;" id="userName" pattern="[a-zA-Z ]{3,}" value="{{user.name}}">
  <span id="error-name" style="color: red;"></span><br><br>	
-<label for="">Enter Your Email ID  <span style="color: red; font-weight:bolder">*</span></label>
-<input type="email" name="email" style="margin-bottom: 10px;" id="userEmail"  title="Please enter a valid Email ID" required>
+<label for="">Enter Your Email ID  </label>
+<input type="email" name="email" style="margin-bottom: 10px;" id="userEmail"  title="Please enter a valid Email ID" value="{{user.email}}" >
  <span id="error-email" style="color: red;"></span><br><br>	
-<label for="">Enter Your Mobile Number  <span style="color: red; font-weight:bolder">*</span></label>
-<input type="text" name="mobile" style="margin-bottom: 10px;" id="phoneNumber" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" required>
+<label for="">Enter Your Mobile Number  </label>
+<input type="text" name="mobile" style="margin-bottom: 10px;" id="phoneNumber" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" value="{{user.mobile}}">
  <span id="error-message" style="color: red;"></span><br><br>	
-<label for="">Enter Your Age <span style="color: red; font-weight:bolder">*</span></label>
-<input type="number" min="18" style="margin-bottom:10px ;" id="age" max="100" title="Please enter a valid age between 18 and 100" name="age" required>
+<label for="">Enter Your Age </label>
+<input type="number" min="18" style="margin-bottom:10px ;" id="age" max="100" title="Please enter a valid age between 18 and 100" name="age" value="{{user.age}}">
  <span id="error-age" style="color: red;"></span><br><br>	
-<label for="">Enter Your Income in (₹)<span style="color: red; font-weight:bolder">*</span></label>
-<input type="number" id="income" style="margin-bottom: 10px;" name="income" required min="0" max="100000000" title="Please enter a valid positive income in Indian Rupees ">
+<label for="">Enter Your Income in (₹)</label>
+<input type="number" id="income" style="margin-bottom: 10px;" name="income" required min="0" max="100000000" title="Please enter a valid positive income in Indian Rupees " value="{{user.income}}">
  <span id="error-income" style="color: red;"></span><br><br>	
-<label for="category">Select Category of Crop:<span style="color: red; font-weight:bolder">*</span></label>
-        <select id="category" style="color: #333;" name="category" onchange="showSelectList()">
+<label for="category">Select Category of Crop:</label>
+        <select id="category" style="color: #333;" name="category" onchange="showSelectList()" >
             <option value="" disabled selected>Select a category</option>
             <option value="Grains">Grains</option>
             <option value="Pulses">Pulses</option>
@@ -250,7 +250,7 @@ input[type="password"]:focus {
                 <!-- Add more vegetables as needed -->
             </select>
         </div>
-    <label for="district">Select the District <strong>(For Maharashtra):</strong> <span style="color: red; font-weight:bolder">*</span></label>
+    <label for="district">Select the District <strong>(For Maharashtra):</strong> </label>
         <select id="district" name="district"  style="color: #333;" onchange="populateCities()">
             <option value="" disabled selected>Select a district</option>
             <option value="Ahmednagar">Ahmednagar</option>
@@ -291,16 +291,16 @@ input[type="password"]:focus {
             <option value="Yavatmal">Yavatmal</option>
         </select>
         <br>
-<label for="">Enter Your Pincode  <span style="color: red; font-weight:bolder">*</span></label>
-<input type="text" name="pincode" style="margin-bottom: 10px;" id="pincode" pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode number" required>
+<label for="">Enter Your Pincode  </label>
+<input type="text" name="pincode" style="margin-bottom: 10px;" id="pincode" pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode number" value="{{user.pincode}}">
  <span id="error-pincode" style="color: red;"></span><br><br>
-<label for="">Enter Your Field Size in Acres <span style="color: red; font-weight:bolder">*</span></label>
-<input type="number" name="fieldsize" required  min="0" style="margin-bottom:10px ;" id="land" max="1000000" title="Please enter a valid field size greater than 0" name="land" required>
+<label for="">Enter Your Field Size in Acres </label>
+<input type="number" name="fieldsize"   min="0" style="margin-bottom:10px ;" id="land" max="1000000" title="Please enter a valid field size greater than 0" name="land" value="{{user.fieldsize}}" >
  <span id="error-land" style="color: red;"></span><br><br>	
 
 
-<label for="">Upload Your Photograph Here <span style="color: red; font-weight:bolder">*</span></label>
-<input type="file" id="image" name="image" accept="image/*" required>
+<label for="">Upload Your Photograph Here </label>
+<input type="file" id="image" name="image" accept="image/*" >
 <br><br>
 
 
