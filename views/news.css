@@ -164,3 +164,11 @@ h5{
  padding-left: 1rem;
  padding-top: 0.5rem;
 }
+
+@media screen and (max-width:780px){
+    .news-card {
+        margin: auto;
+        width: 33px;
+    }
+    
+}
