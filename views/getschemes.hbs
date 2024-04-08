@@ -217,6 +217,13 @@ h6{
     transform: translateY(0);
   }
 }
+@media screen and (max-width: 780px) {
+    .responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+    
+}
     </style>
 </head>
 <body>
@@ -227,6 +234,7 @@ h6{
     <p>Explore the latest agricultural schemes for your farm.</p>
   </div>
   <main>
+    <div class="responsive">
     <form id="userForm" style="margin: auto;">
           <table style="margin: auto;">
           <tr>
@@ -267,7 +275,7 @@ h6{
         </select></td>
           </tr>
           <tr>
-            <td><label for="waterAvailability">Is what Available to you ?<span style="color: red;">*</span></label></td>
+            <td><label for="waterAvailability">Is Water Available to you ?<span style="color: red;">*</span></label></td>
             <td> <select id="waterAvailability" name="waterAvailability"  style="color: #333;" >
             <option value="" disabled selected>Select Water Availability </option>
             <option value="Yes">Yes</option>
@@ -354,6 +362,7 @@ h6{
         </form>
 
     <div id="recommendedSchemes" style="width: 700px; background-color:#a3f0a7;margin:auto; border-radius:10px;height:fit-content;margin-top:2rem;text-align:center;align-items:center"></div>
+    </div>
   </main>
   <h1 style="text-align:center; margin:auto;font-size:3rem; font-weight:bolder;color:#28a745">Get Popular Schemes Here</h1>
 
