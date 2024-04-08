@@ -36,6 +36,11 @@ main {
   margin: auto;
   padding: 20px;
 }
+#resp {
+  margin: auto;
+  
+  padding: 20px;
+}
 
 form {
   background-color: rgb(181, 244, 187);
@@ -176,6 +181,14 @@ table {
     transform: translateY(0);
   }
 }
+@media screen and (max-width:780px) {
+  #resp{
+    width: 100%;
+    overflow-x:auto ;
+   
+  }
+ 
+}
 
     </style>
 </head>
@@ -186,7 +199,9 @@ table {
     <h3>Get Your Personalized Crops here</h3>
     <p>Explore the crops that suit your farm.</p>
   </div>
-  <main>
+  
+  <main style="overflow-x: auto; width:100%">
+    
     <form id="userForm" style="margin: auto;" cellpadding="10px" cellspacing="20px">
         <table style="margin: auto;">
           <tr>
@@ -236,8 +251,11 @@ table {
     
   </main>
   <div id="recommendedCrops"></div><br>
+
+
+<div id="resp">
   <h1 style="font-weight: bolder;font-size:2.5rem;color:#28a745;text-align:center;margin:auto">Check MSP of your Crop</h1>
-    <form id="cropForm" style="margin: auto; text-align:center;justify-content:center;margin-bottom:1rem;">
+    <form id="cropForm" style="margin: auto; text-align:center;justify-content:center;margin-bottom:1rem;" >
         <label for="cropName">Select the Crop Name:</label>
         <select id="cropName" name="cropName"  style="color: #333;" >
             <option value="" disabled selected>Select the Crop </option>
@@ -260,7 +278,7 @@ table {
         <button type="submit" id="btn-msp">Get MSP</button>
     </form>
     <div id="mspResult" style="margin: auto; height:200px; width:700px;border-radius:10px;background-color:#afe5b1;visibility:hidden; align-items:center;justify-content:center;text-align:center;padding:2rem 2rem;font-size:1.2rem;"></div>
-
+</div>
   <footer>
         <p>&copy; 2023 FarmAssist. All rights reserved.</p>
     </footer>
