@@ -30,6 +30,7 @@
     font-size: large;
     background: #4caf50;
     border-radius: 10px;
+    margin-bottom: 2rem;
 }
 h1{
     text-align: center;
@@ -179,6 +180,12 @@ h1{
     font-size: 1rem;
     font-weight: 200;
 }
+footer {
+    background-color: #28a745;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
 .form-container{
     display: none;
     /* display: flex; */
@@ -215,6 +222,29 @@ h1{
     border-radius: 100%;
     margin-bottom: 1px;
 }
+@media screen and (max-width:780px){
+    .wrapper{
+        width:95%;
+        font-size: large;
+
+    }
+    .wrapper h1{
+        font-size: 1.3rem;
+        font-weight: bolder;
+    }
+    .parameter{
+        width: 100%;
+    }
+    .parameter-container {
+        display: flex;
+        flex-direction: column  ;
+        gap: 10px 20px;
+        justify-content: center;
+        align-items: center;
+        
+    }
+}
+
     </style>
 </head>
 
@@ -288,6 +318,9 @@ h1{
         </div>
 
     </div>
+    <footer>
+            <p>&copy; 2023 FarmAssist. All rights reserved.</p>
+        </footer>
     <script>
          const userTab=document.querySelector('[data-userWeather]');
  const searchTab=document.querySelector('[data-searchWeather]');
