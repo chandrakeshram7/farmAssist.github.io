@@ -325,8 +325,8 @@ h6{
             <td colspan="2" style="text-align:center;"><button type="button" id="recommendBtn" onclick="recommendSchemes()">Recommend Schemes</button></td>
           </tr>
           <tr >
-            <td></td>
-            <td></td>
+            <td colspan="2"><img src="loading.gif" alt="Loading...." id="loadingImg" style="display: none;margin:auto" height="100px" width="100px"></td>
+            
           </tr>
         </table>
 
@@ -462,45 +462,63 @@ To incentivise the states so as to increase public investment in Agriculture and
 
  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+      const loadingImage = document.getElementById("loadingImg");
         // JavaScript function to recommend schemes
         async function recommendSchemes() {
-            // Collect form data
-            const selectCrop= document.getElementById('cropName');
-            const selectedIndexCrop = selectCrop.selectedIndex;
-            const selectValueCrop = selectCrop.options[selectedIndexCrop].value;
+    // Show loading image
+    showLoadingImage();
 
-            const selectwaterAvail= document.getElementById('waterAvailability');
-            const selectedIndexWater = selectwaterAvail.selectedIndex;
-            const selectValueWater = selectwaterAvail.options[selectedIndexWater].value;
+    // Collect form data
+    const selectCrop = document.getElementById('cropName');
+    const selectedIndexCrop = selectCrop.selectedIndex;
+    const selectValueCrop = selectCrop.options[selectedIndexCrop].value;
 
-            const selectDistrict= document.getElementById('district');
-            const selectedIndexDistrict = selectDistrict.selectedIndex;
-            const selectValueDistrict = selectDistrict.options[selectedIndexDistrict].value;
-            
-            
-            const formData = {
-                Farm_Size: document.getElementById('farmSize').value,
-                Crop_Names: selectValueCrop,
-                Water_Availability: selectValueWater,
-                Annual_Income_of_Farmer: document.getElementById('annualIncome').value,
-                District: selectValueDistrict,
-                
-            };
+    const selectwaterAvail = document.getElementById('waterAvailability');
+    const selectedIndexWater = selectwaterAvail.selectedIndex;
+    const selectValueWater = selectwaterAvail.options[selectedIndexWater].value;
 
-            try {
-                // Make a POST request to the backend API
-                 const timestamp = new Date().getTime();
-        
+    const selectDistrict = document.getElementById('district');
+    const selectedIndexDistrict = selectDistrict.selectedIndex;
+    const selectValueDistrict = selectDistrict.options[selectedIndexDistrict].value;
+
+
+    const formData = {
+        Farm_Size: document.getElementById('farmSize').value,
+        Crop_Names: selectValueCrop,
+        Water_Availability: selectValueWater,
+        Annual_Income_of_Farmer: document.getElementById('annualIncome').value,
+        District: selectValueDistrict,
+
+    };
+
+    try {
+        // Make a POST request to the backend API
+        const timestamp = new Date().getTime();
+
         // Make a POST request to the backend API with the timestamp
-                const response = await axios.post(`https://ml-model1-three.vercel.app/getschemes?timestamp=${timestamp}`, formData);
+        const response = await axios.post(`https://ml-model1-three.vercel.app/getschemes?timestamp=${timestamp}`, formData);
 
-                // Handle the response, update UI, etc.
-                console.log(response.data);
-                displayRecommendations(response.data);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
+        // Handle the response, update UI, etc.
+        console.log(response.data);
+        displayRecommendations(response.data);
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        // Hide loading image after request completion (whether successful or not)
+        hideLoadingImage();
+    }
+}
+
+function showLoadingImage() {
+    // Show loading image here
+    loadingImage.style.display = "block"; // Assuming you have a loading image element with id "loadingImage"
+}
+
+function hideLoadingImage() {
+    // Hide loading image here
+    loadingImage.style.display = "none"; // Assuming you have a loading image element with id "loadingImage"
+}
+
 
         // Modify the displayRecommendations function
   function displayRecommendations(recommendedSchemesObj) {
