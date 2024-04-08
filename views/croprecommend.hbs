@@ -220,6 +220,10 @@ table {
           <tr >
             <td colspan="2" style="text-align:center;"><button type="button" id="recommendBtn" onclick="recommendCrops()">Recommend Crop</button></td>
           </tr>
+          <tr>
+            <td colspan="2"><img src="loading.gif" alt="Loading...." id="loadingImg" style="display: none;margin:auto" height="100px" width="100px"></td>
+
+          </tr>
           <tr >
             <td  rowspan="2" colspan="2" style="display: hidden;margin-top:2rem;text-align:center;font-size:1.2rem;font-weight:bolder;" id="displayRec"></td>
           </tr>
@@ -252,7 +256,8 @@ table {
   <option value="Sesamum">Sesamum</option>
   <option value="Nigerseed">Nigerseed</option>
         </select>
-        <button type="submit">Get MSP</button>
+        <img src="loading.gif" alt="Loading...." id="loadingImgMSP" style="display: none;margin:auto" height="100px" width="100px">
+        <button type="submit" id="btn-msp">Get MSP</button>
     </form>
     <div id="mspResult" style="margin: auto; height:200px; width:700px;border-radius:10px;background-color:#afe5b1;visibility:hidden; align-items:center;justify-content:center;text-align:center;padding:2rem 2rem;font-size:1.2rem;"></div>
 
@@ -263,7 +268,12 @@ table {
  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         // JavaScript function to recommend schemes
+        const loadingImage = document.getElementById("loadingImg");
+        const loadingImageMSP = document.getElementById("loadingImgMSP");
+
         async function recommendCrops() {
+          
+          showLoadingImage();
             // Collect form data
             const formData = {
                 nitrogen: document.getElementById('nitrogen').value,
@@ -288,6 +298,11 @@ table {
             } catch (error) {
                 console.error('Error:', error);
             }
+             finally {
+        // Hide loading image after request completion (whether successful or not)
+        hideLoadingImage();
+    }
+
         }
 
         // Modify the displayRecommendations function
@@ -314,6 +329,27 @@ table {
 
         }
   }
+  function showLoadingImage() {
+    // Show loading image here
+    loadingImage.style.display = "block"; // Assuming you have a loading image element with id "loadingImage"
+}
+
+function hideLoadingImage() {
+    // Hide loading image here
+    loadingImage.style.display = "none"; // Assuming you have a loading image element with id "loadingImage"
+    
+}
+function showLoadingImageMSP() {
+    // Show loading image here
+    loadingImageMSP.style.display = "block"; // Assuming you have a loading image element with id "loadingImage"
+    
+}
+
+function hideLoadingImageMSP() {
+    // Hide loading image here
+    loadingImageMSP.style.display = "none"; // Assuming you have a loading image element with id "loadingImage"
+   
+}
 
 
 
@@ -321,11 +357,10 @@ table {
 
  document.getElementById("cropForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent default form submission
-    
     let cropName = document.getElementById("cropName");
     let selectedIndexCrop = cropName.selectedIndex;
     let selectValueCrop = cropName.options[selectedIndexCrop].value;
-    
+    showLoadingImageMSP();
     // Make a POST request to your ML API
     axios.post('https://crop-predict-fxeb.onrender.com/msp', {
         crop_name: selectValueCrop
@@ -386,6 +421,7 @@ table {
             table.align="center";
             table.alignItems="center"
             mspResult.appendChild(table);
+            hideLoadingImageMSP();
         } else {
             mspResult.style.visibility ="visible"
             // If response data is not an object, display it as is
@@ -457,14 +493,18 @@ table {
             table.align="center";
             table.alignItems="center"
             mspResult.appendChild(table);
+            hideLoadingImageMSP();
         }
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
         mspResult.style.visibility = "visible"
         document.getElementById("mspResult").textContent = "MSP Data for the Required Crop Not Available";
-    });
-});
+        hideLoadingImageMSP();
+    })
+    
+})
+
 
 
 
