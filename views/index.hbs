@@ -12,6 +12,19 @@
         .intro{
             
            overflow: hidden;
+            
+           background-image: url('img1.jpg');
+           background-repeat: no-repeat;
+           background-size:cover; 
+           height: 600px; 
+           width: 90%; 
+           margin:auto; 
+           
+           border-radius: 20px; 
+           justify-content: center;
+           align-items: center; 
+           text-align: center;
+          
 
         }
         .learn{
@@ -37,6 +50,7 @@
         
         
         .aboutus{
+          display: flex;
             height: fit-content;
             width: 90%;
             overflow: hidden;
@@ -354,19 +368,191 @@ footer {
     padding: 20px;
     text-align: center;
 }
+#two{
+  font-size: 4rem; 
+  color:rgb(77, 252, 77); 
+  letter-spacing: 5px; 
+  font-weight: bolder; 
+  position: relative; 
+  top: 15rem; 
+  left: 1rem;
+}
+
+#three{
+  position: relative;
+  top: 15rem;
+  left: 0rem; 
+  color: white; 
+  font-size: 1.5rem;
+  font-weight: 500; 
+  margin: auto; 
+  text-align: center;
+}
+#spn{
+   font-size: 4rem; 
+   color:white; 
+   letter-spacing: 5px; 
+   font-weight: bolder;
+}
+
+@media only screen and (max-width:600px){
+  .intro{
+            
+           
+           background-image: url('img1.jpg');
+           background-repeat: no-repeat;
+           background-size:cover; 
+           background-position: center;
+           height: 400px; 
+           width: 100%; 
+           margin:auto; 
+           justify-content: center;
+           align-items: center; 
+           text-align: center;
+          border-radius: 10px;
+
+        }
+        #two{
+  font-size: 3rem; 
+  color:rgb(77, 252, 77); 
+  letter-spacing: 1px; 
+  font-weight: bolder; 
+  position: relative; 
+  top: 15rem; 
+  left: 1rem;
+}
+
+#three{
+  position: relative;
+  top: 15rem;
+  left: 0rem; 
+  color: white; 
+  font-size: 1.1rem;
+  font-weight: 500; 
+  margin: auto; 
+  text-align: center;
+}
+#spn{
+   font-size: 3rem; 
+   color:white; 
+   letter-spacing: 1px; 
+   font-weight: bolder;
+}
+.aboutus{
+  display:block;
+  text-align: justify;
+  margin-top: 0rem;
+  width: 100%;
+  padding: none;
+  margin: none;
+
+  
+}
+.info h1{
+  font-size: 3rem;
+  margin: auto;
+  text-align: center;
+}
+.learn{
+  margin: auto;
+  justify-self: center;
+  margin-left: 4rem;
+  
+}
+.vid{
+  margin: auto;
+  overflow: hidden;
+  border-radius: 19px;
+  margin-top: 1rem;
+}
+.srv{
+  font-size: 3rem;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+.grid-container{
+  display: inline-block;
+  
+  
+}
+
+.grid-item{
+  margin-bottom: 2rem;
+}
+.gallery-header h2{
+  font-size: 3rem;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  transform: translateY(0);
+  transition: transform 0.5s ease-in-out;
+}
+.contact{
+  display: inline-block;
+  
+}
+.cont h1{
+  font-size: 3rem;
+  letter-spacing: 2px;
+  font-weight: bolder;
+}
+.cont{
+  margin-bottom: 2rem;
+}
+.cont .learn{
+  margin: auto;
+  
+}
+.im img{
+  width: 100%;
+  
+}
+.testimonial-container{
+  display: inline-block;
+  margin-top: 0rem;
+}
+.testimonial-container .side-right{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.side-right .learn{
+  margin: auto;
+}
+.side-right h1{
+  font-size: 3rem;
+}
+.testimonial{
+  height: fit-content;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+.sign h1{
+  font-size: 3rem;
+}
+.sign .learn {
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+}
         
     </style>
 </head>
 <body>
   {{>navbar}}
     
-    <div class="intro" style="margin-top: 2rem; background-image: url('img1.jpg');background-repeat: no-repeat;background-size:cover; height: 600px; width: 90%; margin:auto; margin-top: 2rem;border-radius: 20px; justify-content: center;align-items: center; text-align: center;margin: auto;" data-aos="fade-right" data-aos-duration="2000" >
+    <div class="intro" style="" data-aos="fade-right" data-aos-duration="2000" >
         
-        <h2 style=" font-size: 4rem; color:rgb(77, 252, 77); letter-spacing: 5px; font-weight: bolder; position: relative; top: 14rem; left: 5rem;" >FARM<span style=" font-size: 4rem; color:white; letter-spacing: 5px; font-weight: bolder;">ASSIST</span> </h2>
-        <h3 style="position: relative;top: 13.5rem;left: 4rem; color: white; font-size: 1.5rem;font-weight: 500; margin: auto; text-align: center;">One stop solution to all the problems of our farmers</h3>
+        <h2 id="two" style=" " >FARM<span id="spn" style="">ASSIST</span> </h2>
+        <h3 id="three" style="">One stop solution to all the problems of our farmers</h3>
         
     </div>
-    <div class="aboutus" style="display: flex; justify-content: space-around;">
+    <div class="aboutus" style="justify-content: space-around;">
         <div class="info" data-aos="slide-right" data-aos-duration="2000" >
             <h1>About Us</h1>
             <p>We are a Agrotech Company that aims to assist the farmers in their day-to-day activities. We provide 
