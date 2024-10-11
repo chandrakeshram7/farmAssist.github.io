@@ -244,7 +244,24 @@ app.post('/registration',upload.single('image'),async (req, res)=>{
     
             })
             const schemecandidate = await newFarmer.save();
+            const emailSubject1 = 'Welcome to FarmAssist!';
+    const emailBody1 = `<h1>Welcome to FarmAssist, ${name}!</h1>
+      <p>We're excited to have you on board. You can now log in and explore our platform using the credentials you provided during registration.</p>
+      <p>Click <a href="https://farm-assist-github-io.vercel.app/login">here</a> to login to your account.</p>
+      <p>If you have any questions, feel free to contact our support team at support@farmassist.com.</p>
+      <br>
+      <p>Best Regards,<br>FarmAssist Team</p>`;
+
+    // Send the registration email
+    await transporter.sendMail({
+      from: 'chandrakeshram31@gmail.com',
+      to: email,
+      subject: emailSubject1,
+      html: emailBody1,
+    });
+
             res.status(201).redirect("thanks");
+            
         }
         else {
             res.send('Passwords are not matching');
