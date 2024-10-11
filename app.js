@@ -254,12 +254,17 @@ app.post('/registration',upload.single('image'),async (req, res)=>{
       <p>Best Regards,<br>FarmAssist Team</p>`;
 
     // Send the registration email
+    try {
     await transporter.sendMail({
-      from: 'chandrakeshram31@gmail.com',
-      to: email,
-      subject: emailSubject1,
-      html: emailBody1,
+        from: 'chandrakeshram31@gmail.com',
+        to: req.body.email,
+        subject: emailSubject1,
+        html: emailBody1,
     });
+} catch (error) {
+    console.error('Error sending email:', error.message);
+    throw new Error('Email sending failed');
+}
             res.status(201).redirect("thanks");
 
             
