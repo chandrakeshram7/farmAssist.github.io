@@ -244,6 +244,7 @@ app.post('/registration',upload.single('image'),async (req, res)=>{
     
             })
             const schemecandidate = await newFarmer.save();
+            res.status(201).redirect("thanks");
             const emailSubject1 = 'Welcome to FarmAssist!';
     const emailBody1 = `<h1>Welcome to FarmAssist, ${name}!</h1>
       <p>We're excited to have you on board. You can now log in and explore our platform using the credentials you provided during registration.</p>
@@ -260,7 +261,7 @@ app.post('/registration',upload.single('image'),async (req, res)=>{
       html: emailBody1,
     });
 
-            res.status(201).redirect("thanks");
+            
             
         }
         else {
