@@ -510,7 +510,7 @@ app.get('/contactus',isAuthenticated,(req, res)=>{
 app.get('/news',isAuthenticated ,async (req, res) => {
     const axios = require('axios');
 
-    const apiKey = 'ddf13f29e2a7416eb9ee9e1a682e2de3';
+    const apiKey = 'c3e23cba1c614a4ea4122d061644e039';
     const apiUrl = 'https://newsapi.org/v2/top-headlines';
     
     try {
